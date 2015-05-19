@@ -22,6 +22,8 @@ gem 'neat'
 # Use Simple form gem
 gem 'simple_form'
 
+# Use Rubocop for consistent styling
+gem 'rubocop', require: false
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
