@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+# Use Bourbon Neat frontend framework
+gem 'bourbon'
+gem 'neat'
+
 # Use Simple form gem
 gem 'simple_form'
 
