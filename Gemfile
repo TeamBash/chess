@@ -22,6 +22,8 @@ gem 'neat'
 # Use Simple form gem
 gem 'simple_form'
 
+# Use Devise for user authentication
+gem 'devise', '>= 3.2.4'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
