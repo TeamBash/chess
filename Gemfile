@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Use Bourbon Neat frontend framework
+# Use Bourbon Neat for frontend framework 
 gem 'bourbon'
 gem 'neat'
 
