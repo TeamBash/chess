@@ -1,1 +1,6 @@
-<h1>Welcome! Team BASH!</h1>
+<h1><%= link_to 'Create a new Game', new_game_path %><h1>
+<br />
+<% @games.each do |game| %>
+	<h2><%= link_to game.name, game_path(game) %></h2>
+<% end %>
+

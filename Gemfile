@@ -22,9 +22,6 @@ gem 'neat'
 # Use Simple form gem
 gem 'simple_form'
 
-# Use Rubocop for consistent styling
-gem 'rubocop', require: false
-
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -40,6 +37,11 @@ gem 'jbuilder', '~> 1.2'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :development do
+  # Use Rubocop for consistent styling
+  gem 'rubocop', require: false
 end
 
 # Use ActiveModel has_secure_password
