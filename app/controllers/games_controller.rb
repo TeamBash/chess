@@ -7,31 +7,31 @@
 
 class GamesController < ApplicationController
   def index
-  	@games = Game.all
+    @games = Game.all
   end
 
   def new
-  	@game = Game.new
+    @game = Game.new
   end
 
   def create
-  	Game.create(game_params)
-  	redirect_to root_path
+    Game.create(game_params)
+    redirect_to root_path
   end
 
   def show
-  	@game = Game.find(params[:id])
+    @game = Game.find(params[:id])
   end
 
   def destroy
-  	@game = Game.find(params[:id])
+    @game = Game.find(params[:id])
 
-  	@game.destroy
+    @game.destroy
     redirect_to root_path
   end
 
   def edit
-  	@game = Game.find(params[:id])
+    @game = Game.find(params[:id])
   end
 
   def update
@@ -41,13 +41,13 @@ class GamesController < ApplicationController
     if @game.valid?
       redirect_to root_path
     else
-      render :edit, :status => :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
   private
 
   def game_params
-  	params.require(:game).permit(:name)
+    params.require(:game).permit(:name)
   end
 end
