@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'omniauth'
+
 # Use OmniAuth for Facebook login!
 gem 'omniauth-facebook'
 

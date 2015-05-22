@@ -155,6 +155,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   neat
+  omniauth
   omniauth-facebook
   pg
   rails (= 4.0.1)
