@@ -29,3 +29,17 @@ Chess::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 end
+
+# localhost:3030
+Devise.setup do |config|
+  # omni-auth facebook
+  config.omniauth :facebook, "451015335074220", "3d90b7d018825448579290edef01bbc5"
+ 
+end
+
+# heroku
+# Devise.setup do |config|
+#   # omni-auth facebook
+#   config.omniauth :facebook, "449907398518347", "74e4ef7adca85a2deb044ef458842437"
+ 
+# end

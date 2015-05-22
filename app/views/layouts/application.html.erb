@@ -7,11 +7,48 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<!--Facebook SDK, please leave this here -->
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '449907398518347',
+      xfbml      : true,
+      version    : 'v2.3'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
 <%= yield %>
+
+<!-- Facebook LOGIN button, just here
+	for testing purposes and may be moved
+	or deleted from this page. It is also
+	on login page -->
+
+<br /><br />
+<!--Facebook LIKE button, feel free to comment out or move -->
+<div
+  class="fb-like"
+  data-share="true"
+  data-width="450"
+  data-show-faces="true">
+</div>
+
+<br />
+
+<!-- Facebook COMMENTS, feel free to comment out or move -->
+<div class="fb-comments" data-href="http://chess-team-bash.herokuapp.com/" data-width="300" data-numposts="5" data-colorscheme="light"></div>
 
 </body>
 </html>

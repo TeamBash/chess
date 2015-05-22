@@ -91,3 +91,9 @@ Chess::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 end
+
+Devise.setup do |config|
+  # omni-auth facebook
+  config.omniauth :facebook, "449907398518347", "74e4ef7adca85a2deb044ef458842437"
+ 
+end
