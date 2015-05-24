@@ -7,19 +7,19 @@
 
 # Offense count: 1
 # Cop supports --auto-correct.
-# Lint/DeprecatedClassMethods:
-#   Enabled: false
+Lint/DeprecatedClassMethods:
+  Enabled: false
 
 # Offense count: 34
 # Configuration parameters: AllowURI, URISchemes.
-# Metrics/LineLength:
-#   Max: 174
+Metrics/LineLength:
+  Max: 174
 
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedHashRocketStyle, EnforcedColonStyle, EnforcedLastArgumentHashStyle, SupportedLastArgumentHashStyles.
-# Style/AlignHash:
-#   Enabled: false
+Style/AlignHash:
+  Enabled: false
 
 # Offense count: 1
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -33,14 +33,14 @@ Style/Documentation:
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
-# Style/EmptyLinesAroundBlockBody:
-#   Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
 
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: Width.
-# Style/IndentationWidth:
-#   Enabled: false
+Style/IndentationWidth:
+  Enabled: false
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -50,10 +50,10 @@ Style/StringLiterals:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-# Style/Tab:
-#   Enabled: false
+Style/Tab:
+  Enabled: false
 
 # Offense count: 1
 # Cop supports --auto-correct.
-# Style/TrailingWhitespace:
-#   Enabled: false
+Style/TrailingWhitespace:
+  Enabled: false

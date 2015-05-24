@@ -6,6 +6,8 @@
 # Game ends upon checkmate, stalemate or player resignation
 
 class GamesController < ApplicationController
+  # before_action :authenticate_user!
+
   def index
     @games = Game.all
   end
@@ -15,8 +17,13 @@ class GamesController < ApplicationController
   end
 
   def create
-    Game.create(game_params)
-    redirect_to root_path
+    @game = Game.create(game_params)
+
+    if @game.valid?
+      redirect_to games_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -27,7 +34,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     @game.destroy
-    redirect_to root_path
+    redirect_to games_path
   end
 
   def edit
@@ -39,7 +46,7 @@ class GamesController < ApplicationController
 
     @game.update_attributes(game_params)
     if @game.valid?
-      redirect_to root_path
+      redirect_to games_path
     else
       render :edit, status: :unprocessable_entity
     end

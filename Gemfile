@@ -15,12 +15,14 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-# Use Bourbon Neat for frontend framework 
-gem 'bourbon'
-gem 'neat'
+# Use Bootstrap for frontend framework 
+gem 'bootstrap-sass', '~> 3.3.4'
 
 # Use Simple form gem
 gem 'simple_form'
+
+# Use factory girl for testing
+gem 'factory_girl_rails', '~> 4.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
