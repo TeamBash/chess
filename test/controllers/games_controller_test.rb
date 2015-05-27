@@ -56,6 +56,7 @@ class GamesControllerTest < ActionController::TestCase
   end
 
   test "update name" do
+    # sign_in_user
     game = FactoryGirl.create(:game)
     patch :update, id: game.id, game: { name: 'new name' }
     expected = 'new name'
@@ -63,6 +64,7 @@ class GamesControllerTest < ActionController::TestCase
   end
 
   test "delete game" do
+    # sign_in_user
     game = FactoryGirl.create(:game)
     assert_difference 'Game.count', -1 do
       delete :destroy, id: game.id
