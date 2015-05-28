@@ -94,6 +94,5 @@ end
 
 Devise.setup do |config|
   # omni-auth facebook
-  config.omniauth :facebook, "449907398518347", "74e4ef7adca85a2deb044ef458842437"
- 
+  config.omniauth :facebook, ENV['facebook_app_id_prod'], ENV['facebook_secret_prod']
 end
