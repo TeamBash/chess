@@ -20,10 +20,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-# Use Bourbon Neat for frontend framework 
-gem 'bourbon'
-gem 'neat'
-
 # Use Simple form gem
 gem 'simple_form'
 
@@ -46,6 +42,8 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+gem 'bootstrap-sass', '~> 3.3.4'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
