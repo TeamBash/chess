@@ -5,8 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, 
          :omniauthable, :omniauth_providers => [:facebook]
 
-  has_many :white_games, class: :Game, foreign_key: :'white_user_id'
-  has_many :black_games, class: :Game, foreign_key: :'black_user_id'
+  has_many :pieces
+  has_many :games, through: :user_games
+  has_many :user_games
+  
+  #  UserGame.create(user: user, game: game)
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
