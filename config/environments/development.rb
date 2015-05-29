@@ -1,4 +1,6 @@
 Chess::Application.configure do
+  config.action_mailer.default_url_options = { :host => 'localhost:3030' }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -26,4 +28,10 @@ Chess::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+end
+
+# localhost:3030
+Devise.setup do |config|
+  # omni-auth facebook
+  config.omniauth :facebook, ENV['facebook_app_id_dev'], ENV['facebook_secret_dev']
 end

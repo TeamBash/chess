@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'omniauth'
+
+# Use OmniAuth for Facebook login!
+gem 'omniauth-facebook'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 
@@ -15,18 +20,6 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-# Use Bootstrap for frontend framework 
-gem 'bootstrap-sass', '~> 3.3.4'
-
-# Use Simple form gem
-gem 'simple_form'
-
-# Use factory girl for testing
-gem 'factory_girl_rails', '~> 4.0'
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -35,6 +28,24 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+# Use bootstrap for frontend framework
+gem 'bootstrap-sass', '~> 3.3.4'
+
+# Use figaro to manage private data
+gem 'figaro'
+
+# Use Simple form gem
+gem 'simple_form'
+
+# Use Devise for user authentication
+gem 'devise', '>= 3.2.4'
+
+# Use factory girl for testing
+gem 'factory_girl_rails', '~> 4.0'
+
+# See https://github.com/sstephenson/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
