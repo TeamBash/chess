@@ -33,13 +33,5 @@ end
 # localhost:3030
 Devise.setup do |config|
   # omni-auth facebook
-  config.omniauth :facebook, "451015335074220", "3d90b7d018825448579290edef01bbc5"
- 
+  config.omniauth :facebook, ENV['facebook_app_id_dev'], ENV['facebook_secret_dev']
 end
-
-# heroku
-# Devise.setup do |config|
-#   # omni-auth facebook
-#   config.omniauth :facebook, "449907398518347", "74e4ef7adca85a2deb044ef458842437"
- 
-# end
