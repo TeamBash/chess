@@ -4,10 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, 
          :omniauthable, :omniauth_providers => [:facebook]
-
-  has_many :white_games, class: :Game, foreign_key: :'white_user_id'
-  has_many :black_games, class: :Game, foreign_key: :'black_user_id'
-
+  
+  has_many :pieces
+  has_many :game_users
+  has_many :games, through: :game_users
+  
+  #  UserGame.create(user: user, game: game)
+  
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
