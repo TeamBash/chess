@@ -1,17 +1,16 @@
-/* ------ Chess Board ----- */ 
-#chess_board { 
-  border:5px solid #000; 
-
+.booyah-box {
+  h2, h1 {
+    margin:10px;
+  }
 }
-#chess_board td {
-	background:#fff;
-	height:80px;
-	text-align:center;
-	vertical-align:middle;
-	width:80px;
+/*for styling simple form errors*/
+.field_with_errors {
+  color: #ff3333;
+  background-color: #FFEEEE;
+  border-radius: 3px;
+  padding:8px;
+  margin: 10px;
 }
-
-#chess_board tr:nth-child(odd) td:nth-child(even),
-#chess_board tr:nth-child(even) td:nth-child(odd) {
-	background:#000;
+.clr {
+  clear:both;
 }
