@@ -1,5 +1,5 @@
+<h1><%= link_to 'Create a new Game', new_game_path %><h1>
 <br />
-
-<h1>Welcome! Team Timezone Roulette!</h1>
-
-<br /><br /><br /><br /><br /><br />
+<% @games.each do |game| %>
+	<h2><%= link_to game.name, game_path(game) %></h2>
+<% end %>

@@ -1,3 +1,27 @@
 // Place all the styles related to the games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* ------ Chess Board ----- */ 
+#chess_board { 
+  border:5px solid #000; 
+
+
+}
+#chess_board td {
+	background:#fff;
+	height:80px;
+	text-align:center;
+	vertical-align:middle;
+	width:80px;
+}
+
+#chess_board tr:nth-child(odd) td:nth-child(even),
+#chess_board tr:nth-child(even) td:nth-child(odd) {
+	background:#000;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
