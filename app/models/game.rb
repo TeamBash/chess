@@ -1,9 +1,9 @@
 class Game < ActiveRecord::Base
   has_many :pieces
-  
-  validates :must_have_both_users, :must_have_distinct_users
+
+  # validates :must_have_both_users, :must_have_distinct_users
   validates :name, presence: :true, length: { minimum: 1 }
-  
+
   belongs_to :white_user, class_name: "User", foreign_key: "white_user_id"
   belongs_to :black_user, class_name: "User", foreign_key: "black_user_id"
   belongs_to :next_user, class_name: "User", foreign_key: "next_user_id"
@@ -15,9 +15,9 @@ class Game < ActiveRecord::Base
       self.next_user = self.white_user # sets white user first
     end
   end
-  
+
   private
-  
+
   def must_have_both_user
     if users.size != 2
       errors.add(:users, "must have two")
@@ -38,12 +38,12 @@ class Game < ActiveRecord::Base
       errors.add(:white_user, "must be distinct from black_user")
     end
   end
-  
+
   def board
     board = Array.new(8) { Array.new(8) }
-  
+
     # loop through pieces and populate board
-  
+
     return board
   end
 end

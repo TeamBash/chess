@@ -41,12 +41,20 @@ gem 'simple_form'
 # Use Devise for user authentication
 gem 'devise', '>= 3.2.4'
 
+# Use factory girl for testing
+gem 'factory_girl_rails', '~> 4.0'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :development do
+  # Use Rubocop for consistent styling
+  gem 'rubocop', require: false
 end
 
 # Use ActiveModel has_secure_password

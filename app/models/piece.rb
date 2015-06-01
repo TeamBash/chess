@@ -1,19 +1,19 @@
 class Piece < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
-  
+
   #scopes
   def self.black
     where(color: 'black')
   end
-  
+
   def self.white
     where(color: 'white')
   end
-  
+
   # include obstructions for obstruction checks
   include Obstructions
-  
+
   def is_obstructed(x, y, board)
     # checks if destination is obstructed
     capturable = destination_obstructed?(x, y, board)
@@ -27,5 +27,4 @@ class Piece < ActiveRecord::Base
     # otherwise returns false if a capturable piece is found.
     return false if !capturable.nil?
   end
-  
 end
