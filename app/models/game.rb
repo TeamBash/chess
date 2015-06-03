@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   has_many :pieces
 
-  validates :must_have_both_users, :must_have_distinct_users
+  # validates :must_have_both_users, :must_have_distinct_users
   validates :name, presence: :true, length: { minimum: 1 }
 
   belongs_to :white_user, class_name: 'User'
