@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
-  test "game_created" do
+  test 'game_created' do
     game = Game.create(name: 'Timezone Roulette')
 
     expected = 'Timezone Roulette'

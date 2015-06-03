@@ -2,7 +2,7 @@ class Piece < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
 
-  #scopes
+  # scopes
   def self.black
     where(color: 'black')
   end
@@ -14,17 +14,19 @@ class Piece < ActiveRecord::Base
   # include obstructions for obstruction checks
   include Obstructions
 
-  def is_obstructed(x, y, board)
+  def obstructed?(x, y, board)
     # checks if destination is obstructed
     capturable = destination_obstructed?(x, y, board)
-    return true if capturable.nil?
+    return false if capturable.nil?
+
     # checks if destination is blocked diagonally
-    capturable = diagonal_line_obstructed(x, y, board)
-    return true if capturable.nil?
+    capturable = diagonal_obstructed(x, y, board)
+    return false if capturable.nil?
+    same_color?(capturable) ? (return true) : (return false)
+
     # checks if destination is blocked vertically or horizontally
-    capturable = straight_line_obstructed(x, y, board)
-    return true if capturable.nil?
-    # otherwise returns false if a capturable piece is found.
-    return false if !capturable.nil?
+    capturable = linear_obstructed(x, y, board)
+    return false if capturable.nil?
+    same_color?(capturable) ? (return true) : (return false)
   end
 end
