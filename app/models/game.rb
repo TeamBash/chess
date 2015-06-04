@@ -8,7 +8,9 @@ class Game < ActiveRecord::Base
   belongs_to :white_user, class_name: 'User'
   belongs_to :black_user, class_name: 'User'
   belongs_to :next_user,  class_name: 'User'
-
+  
+  attr_accessor :black_user_email
+  
   def end_turn
     if self.next_user == self.white_user
       self.next_user = self.black_user

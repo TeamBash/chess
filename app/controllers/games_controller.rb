@@ -6,9 +6,7 @@
 # Game ends upon checkmate, stalemate or player resignation
 
 class GamesController < ApplicationController
-  # before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
-
-  attr_accessor :white_user, :black_user
+  before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
 
   def index
     @games = Game.all
@@ -23,9 +21,12 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.create(game_params)
+    @game = Game.new(game_params)
+    @game.white_user = current_user
+    black_user = User.find_by(email: @game.black_user_email)
+    @game.black_user = black_user
 
-    if @game.valid?
+    if @game.save
       # redirect_to game_path(@game)
       redirect_to games_path
     else
@@ -62,9 +63,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(
-      :name,
-      :white_user_id,
-      :black_user_id )
+    params.require(:game).permit(:name,:black_user_email)
   end
 end

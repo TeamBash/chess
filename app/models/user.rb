@@ -5,14 +5,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
-  has_many :games
+  has_many :games, ->(user){
+    where(['white_user_id = ? OR black_user_id = ?',user.id,user.id])}
+    
   has_many :pieces
   delegate :rook, :queen, :king, :knight, :bishop, :pawn, to: :pieces
-
-
-  def self.games
-    Game.where('white_user_id = ? OR black_user_id = ?', {white_user_id: params[:id], black_user_id: params[:id]})
-  end 
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
