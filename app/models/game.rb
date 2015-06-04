@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
   has_many :pieces
+  delegate :rook, :queen, :king, :knight, :bishop, :pawn, to: :pieces
 
   # validates :must_have_both_users, :must_have_distinct_users
   validates :name, presence: :true, length: { minimum: 1 }
@@ -19,19 +20,17 @@ class Game < ActiveRecord::Base
   private
 
   def must_have_both_user
-    return unless users.size == 2
-    errors.add(:users, 'must have two')
-    return unless users.member? self.white_user
-    errors.add(:users, 'must include the white user')
-    return unless users.member? self.black_user
-    errors.add(:users, 'must include the black user')
-    return unless users.member? self.next_user
-    errors.add(:users, 'must include the next user')
+    return unless self.black_user.nil? && self.white_user.nil?
+    self.errors.add(:base, 'must have two')
+    return unless self.white_user.nil?
+    self.errors.add(:white_user, 'must include the white user')
+    return unless self.black_user.nil?
+    self.errors.add(:black_user, 'must include the black user')
   end
 
   def must_have_distinct_users
     return unless self.white_user == self.black_user
-    errors.add(:white_user, 'must be distinct from black_user')
+    self.errors.add(:white_user, 'must be distinct from black_user')
   end
 
   def board

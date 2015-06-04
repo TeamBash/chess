@@ -11,6 +11,10 @@ class Piece < ActiveRecord::Base
     where(color: 'white')
   end
 
+  def valid_move?
+    raise "SYSTEM ERROR: Abstract method"
+  end
+
   # include obstructions for obstruction checks
   include Obstructions
 

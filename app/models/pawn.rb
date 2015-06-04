@@ -3,4 +3,7 @@ class Pawn < Piece
   def self.type
     where(type: 'pawn')
   end
+
+  def valid_move?
+  end
 end

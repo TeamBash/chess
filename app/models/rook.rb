@@ -3,4 +3,7 @@ class Rook < Piece
   def self.type
     where(type: 'rook')
   end
+
+  def valid_move?
+  end
 end

@@ -3,4 +3,7 @@ class King < Piece
   def self.type
     where(type: 'king')
   end
+
+  def valid_move?
+  end
 end
