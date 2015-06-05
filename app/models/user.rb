@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
          :omniauthable, omniauth_providers: [:facebook]
 
   has_many :games, ->(user){
-    where(['white_user_id = ? OR black_user_id = ?',user.id,user.id])}
-    
+    where(['white_user_id = ? OR black_user_id = ?',user.id,user.id])
+  }
+
   has_many :pieces
   delegate :rook, :queen, :king, :knight, :bishop, :pawn, to: :pieces
 
@@ -24,7 +25,7 @@ class User < ActiveRecord::Base
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
+      if data == session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
         user.email = data['email'] if user.email.blank?
       end
     end

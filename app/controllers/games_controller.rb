@@ -17,7 +17,6 @@ class GamesController < ApplicationController
   end
 
   def invite()
-
   end
 
   def create

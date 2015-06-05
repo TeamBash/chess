@@ -12,7 +12,7 @@ class Piece < ActiveRecord::Base
   end
 
   def valid_move?
-    raise "SYSTEM ERROR: Abstract method"
+    raise 'SYSTEM ERROR: Abstract method'
   end
 
   # include obstructions for obstruction checks
