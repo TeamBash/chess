@@ -2,7 +2,7 @@ class Game < ActiveRecord::Base
   has_many :pieces
   delegate :pawns, :rooks, :knights, :bishops, :kings, :queens, to: :pieces
 
-  after_create :board
+  after_create :populate_board
   # validates :must_have_both_users, :must_have_distinct_users
   validates :name, presence: :true, length: { minimum: 1 }
 
@@ -50,8 +50,8 @@ class Game < ActiveRecord::Base
     { y_position: 0, x_position: 7, type: 'Rook', color: 'white', image_name: 'pieces/wr.png' }
   ]
 
-  def board
-    @board = Array.new(8) { Array.new(8) }
+  def populate_board
+    # @board = Array.new(8) { Array.new(8) }
     # loop through pieces and populate board
     INITIAL_PIECE_LOCATIONS.each do |piece|
         self.pieces.create(piece)
