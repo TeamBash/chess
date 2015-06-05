@@ -6,8 +6,6 @@ class CreateGames < ActiveRecord::Migration
       t.integer :black_user_id
       t.integer :next_user_id
       
-      
-      
       t.timestamps
     end
   end
