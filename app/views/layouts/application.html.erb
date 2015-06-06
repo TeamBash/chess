@@ -28,6 +28,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+          <li><%= link_to 'Play', '#' %></li>
+          <li><%= link_to 'Profile', '#' %></li>
           <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
         <% else %>
           <li><%= link_to 'Sign in', '#', :data => {:toggle => 'modal', :target => '#signInModal'} %></li>
@@ -36,6 +38,16 @@
                 </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+  <% if notice.present? %>
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;<%= notice %><a href="#" class="close" data-dismiss="alert">&times;</a>
+    </div>
+  <% end %>
+  <% if alert.present? %>
+    <div class="alert alert-danger">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;<%= alert %><a href="#" class="close" data-dismiss="alert">&times;</a>
+    </div>
+  <% end %>
 </nav>
 
 <!------ begin modals ------>
@@ -76,7 +88,7 @@
           <h4 class="modal-title" id="myModalLabel">Sign up</h4>
         </div>
         <div class="modal-body">
-          <%= simple_form_for(:registration, :url => new_user_registration_path) do |f| %>
+          <%= simple_form_for(:user, :url => user_registration_path) do |f| %>
   <%= f.error_notification %>
 
         <div class="form-inputs">
@@ -120,12 +132,9 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
 <%= yield %>
 
-<br /><br />
+
 <!--Facebook LIKE button, feel free to comment out or move -->
 <!-- <div
   class="fb-like"
@@ -134,7 +143,6 @@
   data-show-faces="true">
 </div> -->
 
-<br />
 
 <!-- Facebook COMMENTS, feel free to comment out or move -->
 <!-- <div class="fb-comments" data-href="http://chess-team-bash.herokuapp.com/" data-width="300" data-numposts="5" data-colorscheme="light"></div> -->
