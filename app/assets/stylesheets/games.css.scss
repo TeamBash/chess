@@ -5,9 +5,8 @@
 /* ------ Chess Board ----- */ 
 #chess_board { 
   border:5px solid #000; 
-
-
 }
+
 #chess_board td {
 	background:#fff;
 	height:80px;
@@ -18,7 +17,7 @@
 
 #chess_board tr:nth-child(odd) td:nth-child(even),
 #chess_board tr:nth-child(even) td:nth-child(odd) {
-	background:#000;
+	background:#555;
 }
 
 .center {

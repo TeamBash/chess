@@ -16,9 +16,11 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def invite()
+  end
+
   def create
     @game = Game.new(game_params)
-    
     @game.white_user = current_user
     black_user = User.find_by(email: @game.black_user_email)
     @game.black_user = black_user
@@ -32,6 +34,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @pieces = @game.pieces
   end
 
   def destroy
