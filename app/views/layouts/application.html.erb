@@ -28,6 +28,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+          <li><%= link_to 'Play', '#' %></li>
+          <li><%= link_to 'Profile', '#' %></li>
           <li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
         <% else %>
           <li><%= link_to 'Sign in', '#', :data => {:toggle => 'modal', :target => '#signInModal'} %></li>
@@ -36,6 +38,12 @@
                 </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+  <% if notice.present? %>
+    <p class="notice"><%= notice %></p>
+  <% end %>
+  <% if alert.present? %>
+    <p class="alert"><%= alert %></p>
+  <% end %>
 </nav>
 
 <!------ begin modals ------>
@@ -120,12 +128,9 @@
    }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
 <%= yield %>
 
-<br /><br />
+
 <!--Facebook LIKE button, feel free to comment out or move -->
 <!-- <div
   class="fb-like"
@@ -134,7 +139,6 @@
   data-show-faces="true">
 </div> -->
 
-<br />
 
 <!-- Facebook COMMENTS, feel free to comment out or move -->
 <!-- <div class="fb-comments" data-href="http://chess-team-bash.herokuapp.com/" data-width="300" data-numposts="5" data-colorscheme="light"></div> -->
