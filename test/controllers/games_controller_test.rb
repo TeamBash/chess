@@ -37,7 +37,7 @@ class GamesControllerTest < ActionController::TestCase
     assert_difference 'Game.count' do
       post :create, game: { name: 'woohoo' }
     end
-    assert_redirected_to games_path
+    assert_redirected_to game_path(Game.last)
   end
 
   test 'create invalid' do

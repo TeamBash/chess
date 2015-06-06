@@ -5,12 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
-  has_many :games, ->(user){
-    where(['white_user_id = ? OR black_user_id = ?',user.id,user.id])
-  }
-
+  has_many :games
   has_many :pieces
   delegate :rook, :queen, :king, :knight, :bishop, :pawn, to: :pieces
+
+  # scope to define games as all games played by given user
+  def games
+    Game.user_games(self)
+  end
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -25,7 +27,7 @@ class User < ActiveRecord::Base
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data == session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
+      if data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info']
         user.email = data['email'] if user.email.blank?
       end
     end

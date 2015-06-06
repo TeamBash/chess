@@ -4,6 +4,6 @@ class Bishop < Piece
     where(type: 'bishop')
   end
 
-  def valid_move?
+  def valid_move?(x, y, board)
   end
 end
