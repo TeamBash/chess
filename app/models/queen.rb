@@ -4,6 +4,6 @@ class Queen < Piece
     where(type: 'queen')
   end
 
-  def valid_move?
+  def valid_move?(x, y, board)
   end
 end

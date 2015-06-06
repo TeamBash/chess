@@ -1,15 +1,20 @@
 class Game < ActiveRecord::Base
-  has_many :pieces
-  delegate :rook, :queen, :king, :knight, :bishop, :pawn, to: :pieces
-
   # validates :must_have_both_users, :must_have_distinct_users
   validates :name, presence: :true, length: { minimum: 1 }
+
+  attr_accessor :black_user_email
+
+  has_many :pieces
+  delegate :rook, :queen, :king, :knight, :bishop, :pawn, to: :pieces
 
   belongs_to :white_user, class_name: 'User'
   belongs_to :black_user, class_name: 'User'
   belongs_to :next_user,  class_name: 'User'
-  
-  attr_accessor :black_user_email
+
+  # scope that returns all games where user is white or black 
+  def self.user_games(user)
+    where('white_user_id = ? OR black_user_id = ?', user.id, user.id)
+  end  
   
   def end_turn
     if self.next_user == self.white_user
