@@ -39,10 +39,14 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
   <% if notice.present? %>
-    <p class="notice"><%= notice %></p>
+    <div class="alert alert-info">
+        <span class="glyphicon glyphicon-check" aria-hidden="true"></span>&nbsp;<%= notice %><a href="#" class="close" data-dismiss="alert">&times;</a>
+    </div>
   <% end %>
   <% if alert.present? %>
-    <p class="alert"><%= alert %></p>
+    <div class="alert alert-danger">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;<%= alert %><a href="#" class="close" data-dismiss="alert">&times;</a>
+    </div>
   <% end %>
 </nav>
 
