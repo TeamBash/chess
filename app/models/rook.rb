@@ -4,6 +4,6 @@ class Rook < Piece
     where(type: 'rook')
   end
 
-  def valid_move?
+  def valid_move?(x, y, board)
   end
 end

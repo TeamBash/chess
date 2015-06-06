@@ -11,8 +11,18 @@ class Piece < ActiveRecord::Base
     where(color: 'white')
   end
 
-  def valid_move?
+  def valid_move?(x, y, board)
     raise "SYSTEM ERROR: Abstract method"
+  end
+
+  def move_to!(x, y, board)
+    if x == nil
+      return render text: 'Not Allowed', status: 'offboard' 
+    elsif obstructed?(x, y, board)
+      return render text: 'Move is obstructed', status: 'obstructed'
+    else
+      return render text: 'Successful move', status: 'onboard'
+    end
   end
 
   # include obstructions for obstruction checks
