@@ -11,6 +11,7 @@ class Piece < ActiveRecord::Base
     where(color: 'white')
   end
 
+
   def valid_move?(x, y, board)
     raise "SYSTEM ERROR: Abstract method"
   end
