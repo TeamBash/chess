@@ -54,7 +54,7 @@ class Game < ActiveRecord::Base
     # @board = Array.new(8) { Array.new(8) }
     # loop through pieces and populate board
     INITIAL_PIECE_LOCATIONS.each do |piece|
-        self.pieces.create(piece)
+      self.pieces.create(piece)
     end
     #return board as 2D array
     #board

@@ -1,13 +1,13 @@
-<h1><%== @game.name %></h1>
+<h1><%= @game.name %></h1>
 
-<%== 
+<%=
   link_to 'delete game', game_path(@game), :method => :delete, 
     :data => {
      :confirm => 'Are you sure you want to delete this game?'
   } 
 %>
 
-<%== link_to 'update game', edit_game_path(@game) %>
+<%= link_to 'update game', edit_game_path(@game) %>
 
 <table id="chess_board" class="center">
     <tr> <!-- top row -->
