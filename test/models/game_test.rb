@@ -2,7 +2,7 @@ require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
   test 'game_created' do
-    game = Game.create(name: 'Timezone Roulette', white_user_id: 1, black_user_id: 2)
+    game = FactoryGirl.create(:game)
     expected = %w[black black white white]
     actual = [game.pieces[0].color, game.pieces[8].color, game.pieces[16].color, game.pieces[24].color]
     assert_equal expected, actual

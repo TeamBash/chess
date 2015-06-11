@@ -7,7 +7,7 @@
 
 class GamesController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
-
+  
   def index
     @games = Game.all
   end
@@ -35,7 +35,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     @pieces = @game.pieces
-    @game.board
+    # @game.board
   end
 
   def destroy

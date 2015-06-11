@@ -1,5 +1,6 @@
 class Game < ActiveRecord::Base
   validates :name, presence: :true, length: { minimum: 1 }
+  after_create  :setup_game
   attr_accessor :black_user_email
   
   has_many :pieces
@@ -13,10 +14,10 @@ class Game < ActiveRecord::Base
   def self.user_games(user)
     where('white_user_id = ? OR black_user_id = ?', user.id, user.id)
   end  
-  
-  def initialize
+    
+  def setup_game
     @board = Array.new(8) { Array.new(8) }
-    create_pieces
+    self.create_pieces
   end
   
   INITIAL_PIECE_LOCATIONS = [
@@ -64,7 +65,7 @@ class Game < ActiveRecord::Base
     end
   end
   
-  def populate_board
+  def board
     self.pieces.each do |p|
       x = p.x_position
       y = p.y_position
