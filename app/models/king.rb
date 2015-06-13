@@ -9,7 +9,7 @@ class King < Piece
     return false if (self.x_position - x).abs > 1 || (self.y_position - y).abs > 1
 
     # checks if there are any obstructions between current position and destination
-    if obstructed?(x, y, board)
+    if self.obstructed?(x, y, board)
       return false 
     else
       return true

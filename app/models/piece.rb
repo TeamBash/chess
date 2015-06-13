@@ -50,16 +50,18 @@ class Piece < ActiveRecord::Base
   def obstructed?(x, y, board)
     # checks if destination is obstructed
     capturable = destination_obstructed?(x, y, board)
-    return false if capturable.nil?
+    return true if capturable.nil?
 
     # checks if destination is blocked diagonally
     capturable = diagonal_obstructed(x, y, board)
-    return false if capturable.nil?
-    same_color?(capturable) ? (return true) : (return false)
+    return true if capturable && same_color?(capturable)
 
     # checks if destination is blocked vertically or horizontally
     capturable = linear_obstructed(x, y, board)
-    return false if capturable.nil?
-    same_color?(capturable) ? (return true) : (return false)
+    return true if capturable && same_color?(capturable)
+
+    # returns no obstructions if no pieces were found in path.
+    # or piece is capturable
+    return false 
   end
 end
