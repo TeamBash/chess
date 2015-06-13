@@ -34,12 +34,12 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @board = @game.populate_board
+    @board = @game.board
   end
 
   def select
     @game = Game.find(params[:game_id])
-    @board = @game.populate_board
+    @board = @game.board
     @piece = Piece.find(params[:id])
   end
 

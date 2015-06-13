@@ -34,8 +34,8 @@ class Game < ActiveRecord::Base
     @board[7][3] = King.create(y_position: 7, x_position: 3, type: 'King', color: 'black', image_name: 'pieces/bk.png', game_id: self.id)
     @board[7][4] = Queen.create(y_position: 7, x_position: 4, type: 'Queen', color: 'black', image_name: 'pieces/bq.png', game_id: self.id)
     @board[7][5] = Bishop.create(y_position: 7, x_position: 5, type: 'Bishop', color: 'black', image_name: 'pieces/bb.png', game_id: self.id)
-    @board[7][6] = Knight.create(y_position: 7, x_position: 1, type: 'Knight', color: 'black', image_name: 'pieces/bn.png', game_id: self.id)
-    @board[7][7] = Rook.create(y_position: 7, x_position: 0, type: 'Rook', color: 'black', image_name: 'pieces/br.png', game_id: self.id)
+    @board[7][6] = Knight.create(y_position: 7, x_position: 6, type: 'Knight', color: 'black', image_name: 'pieces/bn.png', game_id: self.id)
+    @board[7][7] = Rook.create(y_position: 7, x_position: 7, type: 'Rook', color: 'black', image_name: 'pieces/br.png', game_id: self.id)
 
     @board[6][0] = Pawn.create(y_position: 6, x_position: 0, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png', game_id: self.id)
     @board[6][1] = Pawn.create(y_position: 6, x_position: 1, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png', game_id: self.id)
@@ -61,9 +61,9 @@ class Game < ActiveRecord::Base
     @board[0][3] = King.create(y_position: 0, x_position: 3, type: 'King', color: 'white', image_name: 'pieces/wk.png', game_id: self.id)
     @board[0][4] = Queen.create(y_position: 0, x_position: 4, type: 'Queen', color: 'white', image_name: 'pieces/wq.png', game_id: self.id)
     @board[0][5] = Bishop.create(y_position: 0, x_position: 5, type: 'Bishop', color: 'white', image_name: 'pieces/wb.png', game_id: self.id)
-    @board[0][6] = Knight.create(y_position: 0, x_position: 1, type: 'Knight', color: 'white', image_name: 'pieces/wn.png', game_id: self.id)
-    @board[0][7] = Rook.create(y_position: 0, x_position: 0, type: 'Rook', color: 'white', image_name: 'pieces/wr.png', game_id: self.id)
-
+    @board[0][6] = Knight.create(y_position: 0, x_position: 6, type: 'Knight', color: 'white', image_name: 'pieces/wn.png', game_id: self.id)
+    @board[0][7] = Rook.create(y_position: 0, x_position: 7, type: 'Rook', color: 'white', image_name: 'pieces/wr.png', game_id: self.id)
+    
     @board
   end
 

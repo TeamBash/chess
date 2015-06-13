@@ -25,7 +25,7 @@
           <% else %>
             <!-- # class column -->
             <td class='<%= x %>'>
-             <!-- # if a piece returns true => provide linke to move to seperate board for that piece -->
+             <!-- # if a piece returns true => provide link to move to a seperate board for that piece -->
               <%= link_to game_piece_select_path(@board[y][x].game_id, @board[y][x]) do %>
              <!-- # returns image of that piece -->
               <%= image_tag @board[y][x].image_name, :class => 'responsive' %>
