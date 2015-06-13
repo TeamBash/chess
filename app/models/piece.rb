@@ -3,14 +3,32 @@ class Piece < ActiveRecord::Base
   belongs_to :game
 
   # scopes
-  def self.black
-    where(color: 'black')
+  def self.b
+    where(color: 'b')
   end
 
-  def self.white
-    where(color: 'white')
+  def self.w
+    where(color: 'w')
   end
 
+  image_name = {
+   'whiteQueen' => 'pieces/wq.png',
+   'whiteKing' => 'pieces/wk.png',
+   'whiteRook' => 'pieces/wr.png',
+   'whiteBishop' => 'pieces/wb.png',
+   'whiteKnight' => 'pieces/wn.png',
+   'whitePawn' => 'pieces/wp.png',
+   'blackQueen' => 'pieces/bq.png',
+   'blackKing' => 'pieces/bk.png',
+   'blackRook' => 'pieces/br.png',
+   'blackBishop' => 'pieces/bb.png',
+   'blackKnight' => 'pieces/bn.png',
+   'blackPawn' => 'pieces/bp.png'
+  }
+
+  def piece_image
+    image_name["#{self.color}" + "#{self.type.capitalize}"]
+  end
 
   def valid_move?(x, y, board)
     raise "SYSTEM ERROR: Abstract method"

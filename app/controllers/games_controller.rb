@@ -34,8 +34,20 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @pieces = @game.pieces
-    # @game.board
+    @board = @game.populate_board
+  end
+
+  def select
+    @game = Game.find(params[:game_id])
+    @board = @game.populate_board
+    @piece = Piece.find(params[:id])
+  end
+
+  def piece_update
+    @game = Game.find(params[:game_id])
+    @piece = Piece.find(params[:id])
+    @piece.update_attributes(:x_position => params[:x_position], :y_position => params[:y_position])
+    redirect_to game_path(@game)
   end
 
   def destroy

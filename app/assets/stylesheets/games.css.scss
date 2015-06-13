@@ -3,24 +3,53 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* ------ Chess Board ----- */ 
-#chess_board { 
+
+table, td {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+table#chess tr {
+	height: 75px;
+}
+
+table#chess td {
+	width: 75px;
+}
+
+#chess { 
   border:5px solid #000; 
 }
 
-#chess_board td {
-	background:#fff;
-	height:80px;
-	text-align:center;
-	vertical-align:middle;
-	width:80px;
+
+tr:nth-child(even) td:nth-child(even) {
+	background-color: white;
 }
 
-#chess_board tr:nth-child(odd) td:nth-child(even),
-#chess_board tr:nth-child(even) td:nth-child(odd) {
-	background:#555;
+tr:nth-child(odd) td:nth-child(odd) {
+	background-color: white;
+}
+
+tr:nth-child(even) td:nth-child(odd) {
+	background-color: black;
+	color: white;
+}
+
+tr:nth-child(odd) td:nth-child(even) {
+	background-color: black;
+	color: white;
 }
 
 .center {
 	margin-left: auto;
 	margin-right: auto;
+}
+
+td.piece_to_move {
+	border: 5px solid #0099FF
+}
+
+table a:hover {
+	display:block;
+	text-decoration: none;
 }
