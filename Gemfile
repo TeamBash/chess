@@ -38,6 +38,9 @@ gem 'figaro'
 # Use Simple form gem
 gem 'simple_form'
 
+# for debugging
+gem 'pry-rails', :group => :development
+
 # Use Devise for user authentication
 gem 'devise', '>= 3.2.4'
 
