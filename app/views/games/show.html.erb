@@ -1,82 +1,93 @@
+<h1><%= @game.name %></h1>
+
+<%=
+  link_to 'delete game', game_path(@game), :method => :delete, 
+    :data => {
+     :confirm => 'Are you sure you want to delete this game?'
+  } 
+%>
+
+<%= link_to 'update game', edit_game_path(@game) %>
+
 <table id="chess_board" class="center">
     <tr> <!-- top row -->
-        <td id="07"><class="rook black"></a></td>
-        <td id="17"><class="night black"></a></td>
-        <td id="27"><class="bishop black"></a></td>
-        <td id="37"><class="king black"></a></td>
-        <td id="47"><class="queen black"></a></td>
-        <td id="57"><class="bishop black"></a></td>
-        <td id="67"><class="night black"></a></td>
-        <td id="77"><class="rook black"></a></td>
+        <td id="07"><a href ="#"><%= chess_piece(0, 7) %></a></td>
+        <td id="17"><a href ="#"><%= chess_piece(1, 7) %></a></td>
+        <td id="27"><a href ="#"><%= chess_piece(2, 7) %></a></td>
+        <td id="37"><a href ="#"><%= chess_piece(3, 7) %></a></td>
+        <td id="47"><a href ="#"><%= chess_piece(4, 7) %></a></td>
+        <td id="57"><a href ="#"><%= chess_piece(5, 7) %></a></td>
+        <td id="67"><a href ="#"><%= chess_piece(6, 7) %></a></td>
+        <td id="77"><a href ="#"><%= chess_piece(7, 7) %></a></td>
     </tr>
     <tr> <!-- second row -->
-        <td id="06"><class="pawn black"></a></td>
-        <td id="16"><class="pawn black"></a></td>
-        <td id="26"><class="pawn black"></a></td>
-        <td id="36"><class="pawn black"></a></td>
-        <td id="46"><class="pawn black"></a></td>
-        <td id="56"><class="pawn black"></a></td>
-        <td id="66"><class="pawn black"></a></td>
-        <td id="76"><class="pawn black"></a></td>
+        <td id="06"><a href ="#"><%= chess_piece(0, 6) %></a></td>
+        <td id="16"><a href ="#"><%= chess_piece(1, 6) %></a></td>
+        <td id="26"><a href ="#"><%= chess_piece(2, 6) %></a></td>
+        <td id="36"><a href ="#"><%= chess_piece(3, 6) %></a></td>
+        <td id="46"><a href ="#"><%= chess_piece(4, 6) %></a></td>
+        <td id="56"><a href ="#"><%= chess_piece(5, 6) %></a></td>
+        <td id="66"><a href ="#"><%= chess_piece(6, 6) %></a></td>
+        <td id="76"><a href ="#"><%= chess_piece(7, 6) %></a></td>
     </tr>
     <tr> <!-- third row -->
-        <td id="05"></td>
-        <td id="15"></td>
-        <td id="25"></td>
-        <td id="35"></td>
-        <td id="45"></td>
-        <td id="55"></td>
-        <td id="65"></td>
-        <td id="75"></td>
+        <td id="05"><a href ="#"></a></td>
+        <td id="15"><a href ="#"></a></td>
+        <td id="25"><a href ="#"></a></td>
+        <td id="35"><a href ="#"></a></td>
+        <td id="45"><a href ="#"></a></td>
+        <td id="55"><a href ="#"></a></td>
+        <td id="65"><a href ="#"></a></td>
+        <td id="75"><a href ="#"></a></td>
     </tr>
     <tr><!-- fourth row -->
-        <td id="04"></td>
-        <td id="14"></td>
-        <td id="24"></td>
-        <td id="34"></td>
-        <td id="44"></td>
-        <td id="54"></td>
-        <td id="64"></td>
-        <td id="74"></td>
+        <td id="04"><a href ="#"></a></td>
+        <td id="14"><a href ="#"></a></td>
+        <td id="24"><a href ="#"></a></td>
+        <td id="34"><a href ="#"></a></td>
+        <td id="44"><a href ="#"></a></td>
+        <td id="54"><a href ="#"></a></td>
+        <td id="64"><a href ="#"></a></td>
+        <td id="74"><a href ="#"></a></td>
     </tr>
     <tr><!-- firth row -->
-        <td id="03"></td>
-        <td id="13"></td>
-        <td id="23"></td>
-        <td id="33"></td>
-        <td id="43"></td>
-        <td id="53"></td>
-        <td id="63"></td>
-        <td id="73"></td>
+        <td id="03"><a href ="#"></a></td>
+        <td id="13"><a href ="#"></a></td>
+        <td id="23"><a href ="#"></a></td>
+        <td id="33"><a href ="#"></a></td>
+        <td id="43"><a href ="#"></a></td>
+        <td id="53"><a href ="#"></a></td>
+        <td id="63"><a href ="#"></a></td>
+        <td id="73"><a href ="#"></a></td>
     </tr>
     <tr><!-- sixth row -->
-        <td id="12"></td>
-        <td id="22"></td>
-        <td id="32"></td>
-        <td id="42"></td>
-        <td id="42"></td>
-        <td id="52"></td>
-        <td id="62"></td>
-        <td id="72"></td>
+        <td id="12"><a href ="#"></a></td>
+        <td id="22"><a href ="#"></a></td>
+        <td id="32"><a href ="#"></a></td>
+        <td id="42"><a href ="#"></a></td>
+        <td id="42"><a href ="#"></a></td>
+        <td id="52"><a href ="#"></a></td>
+        <td id="62"><a href ="#"></a></td>
+        <td id="72"><a href ="#"></a></td>
     </tr>
     <tr><!-- seventh row -->
-        <td id="01"><class="pawn white"></a></td>
-        <td id="11"><class="pawn white"></a></td>
-        <td id="21"><class="pawn white"></a></td>
-        <td id="31"><class="pawn white"></a></td>
-        <td id="41"><class="pawn white"></a></td>
-        <td id="51"><class="pawn white"></a></td>
-        <td id="61"><class="pawn white"></a></td>
-        <td id="71"><class="pawn white"></a></td>
+        <td id="01"><a href ="#"><%= chess_piece(0, 1) %></a></td>
+        <td id="11"><a href ="#"><%= chess_piece(1, 1) %></a></td>
+        <td id="21"><a href ="#"><%= chess_piece(2, 1) %></a></td>
+        <td id="31"><a href ="#"><%= chess_piece(3, 1) %></a></td>
+        <td id="41"><a href ="#"><%= chess_piece(4, 1) %></a></td>
+        <td id="51"><a href ="#"><%= chess_piece(5, 1) %></a></td>
+        <td id="61"><a href ="#"><%= chess_piece(6, 1) %></a></td>
+        <td id="71"><a href ="#"><%= chess_piece(7, 1) %></a></td>
     </tr>
     <tr><!-- eighth row -->
-        <td id="00"><class="rook white"></a></td>
-        <td id="10"><class="night white"></a></td>
-        <td id="20"><class="bishop white"></a></td>
-        <td id="30"><class="king white"></a></td>
-        <td id="40"><class="queen white"></a></td>
-        <td id="50"><class="bishop white"></a></td>
-        <td id="60"><class="night white"></a></td>
-        <td id="70"><class="rook white"></a></td>
+        <td id="00"><a href ="#"><%= chess_piece(0, 0) %></a></td>
+        <td id="10"><a href ="#"><%= chess_piece(1, 0) %></a></td>
+        <td id="20"><a href ="#"><%= chess_piece(2, 0) %></a></td>
+        <td id="30"><a href ="#"><%= chess_piece(3, 0) %></a></td>
+        <td id="40"><a href ="#"><%= chess_piece(4, 0) %></a></td>
+        <td id="50"><a href ="#"><%= chess_piece(5, 0) %></a></td>
+        <td id="60"><a href ="#"><%= chess_piece(6, 0) %></a></td>
+        <td id="70"><a href ="#"><%= chess_piece(7, 0) %></a></td>
     </tr>
 </table>

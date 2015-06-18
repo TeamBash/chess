@@ -1,5 +1,24 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>Example Title</h1>
+    <h2>Example subtitle</h2>
+    <br>
+    <p>Proin augue magna, sodales et finibus in, feugiat rutrum lacus. Ut volutpat ornare magna, ac fermentum ipsum tincidunt eget. Nunc ut nisi velit. Nam vitae ligula facilisis, imperdiet odio in, bibendum dui. Suspendisse sit amet lectus eget massa consequat tincidunt vel faucibus enim.</p>
+    <%= link_to '#', :class => 'btn btn-primary bt-large' do %>
+      Play Chess &raquo;
+    <% end %>
+  </div>
+  </div>
+</div>
+
+<h1><%= link_to 'Create a new Game', new_game_path %><h1>
 <br />
+<% @games.each do |game| %>
+  <h2><%= link_to game.name, game_path(game) %></h2>
+<% end %>
 
-<h1>Welcome! Team Timezone Roulette!</h1>
-
+<p>
 <br /><br /><br /><br /><br /><br />
+<br /><br /><br /><br /><br /><br />
+</p>
+

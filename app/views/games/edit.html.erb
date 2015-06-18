@@ -1,0 +1,8 @@
+<div class="booyah-box">
+  <h1>Edit the name of your game</h1>
+    <%= simple_form_for @game do |f| %>
+      <%= f.input :name %>
+      <br />
+      <%= f.submit 'Update'%>
+    <% end %>
+</div>
