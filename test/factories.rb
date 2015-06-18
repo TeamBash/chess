@@ -4,10 +4,15 @@ FactoryGirl.define do
   end
 
   factory :user do
-    sequence :email do |n|
-      "haylic#{n}@gmail.com"
-    end
+    sequence(:email) { |n| "email#{n}@factory.com" }
     password 'omglolhahaha'
     password_confirmation 'omglolhahaha'
   end
+
+  # game generates all the pieces but just in case...
+  factory :piece do
+    association :game
+    association :user
+  end
+
 end

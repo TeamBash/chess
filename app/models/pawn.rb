@@ -5,5 +5,6 @@ class Pawn < Piece
   end
 
   def valid_move?(x, y, board)
+    # do work here (overwrites inherited class method)
   end
 end
