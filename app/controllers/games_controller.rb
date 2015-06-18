@@ -38,9 +38,9 @@ class GamesController < ApplicationController
   end
 
   def select
-    @piece = Piece.find(params[:id])
-    @game = @piece.game
+    @game = Game.find(params[:game_id])
     @board = @game.board
+    @piece = Piece.find(params[:id])
   end
 
   def piece_update

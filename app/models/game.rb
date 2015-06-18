@@ -70,7 +70,7 @@ class Game < ActiveRecord::Base
     self.pieces.each do |piece|
       x = piece.x_position
       y = piece.y_position
-      @board[y][x] = piece
+      @board[y][x] = piece 
     end
     return @board
   end
