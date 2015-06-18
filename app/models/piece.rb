@@ -3,12 +3,22 @@ class Piece < ActiveRecord::Base
   belongs_to :game
 
   # scopes
+  # for additional detail see...
+  # http://api.rubyonrails.org/classes/ActiveRecord/Scoping/Named/ClassMethods.html
+  # this is simply 'syntactic sugar' for defining an actual class method
+  
   def self.black
     where(color: 'black')
+  # Piece.black.first
+  # SELECT "pieces".* FROM "pieces" WHERE "pieces"."color" = 'black'
+  # Piece.black.count # 16
   end
 
   def self.white
     where(color: 'white')
+  # Piece.white.first
+  # SELECT "pieces".* FROM "pieces" WHERE "pieces"."color" = 'white'
+  # Piece.white.count # 16
   end
 
 
