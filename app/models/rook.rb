@@ -1,6 +1,6 @@
 class Rook < Piece
   # scopes
-  def self.type
+  def self.type #cap
     where(type: 'rook')
   end
 

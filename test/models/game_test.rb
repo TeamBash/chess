@@ -1,14 +1,14 @@
 require 'test_helper'
 
 class GameTest < ActiveSupport::TestCase
- # test 'game_created' do
- #   game = FactoryGirl.create(:game)
- #   expected = %w[black black white white]
- #   actual = [game.pieces[0].color, game.pieces[8].color, game.pieces[16].color, game.pieces[24].color]
- #   assert_equal expected, actual
- #   assert_equal 32, game.pieces.count
- #   assert_not_empty Game.all
- # end
+  test 'game_created' do
+    game = FactoryGirl.create(:game)
+    expected = %w[black black white white]
+    actual = [game.pieces[0].color, game.pieces[8].color, game.pieces[16].color, game.pieces[24].color]
+    assert_equal expected, actual
+    assert_equal 32, game.pieces.count
+    assert_not_empty Game.all
+  end
 
   test 'board' do
     # populate the board

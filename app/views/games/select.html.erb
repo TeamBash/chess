@@ -1,9 +1,9 @@
 <div class = 'col-xs-10 col-xs-offset-1' 'center'>
 	<table id = 'chess'>
-		<!--# maping the board with row and index -->
+		<!--board with row and index -->
 		<% @board.each_index do |y| %>
 			<tr class ='<%= y %>' >
-			<!-- # maping the board with col and index -->				
+			<!--the board with col and index -->				
 				<% @board[y].each_index do |x| %> 
 					<!-- if the square is empty return blank space -->
 					<% if @board[y][x].nil? %>
@@ -16,7 +16,7 @@
 						</td>
 						
 					<% elsif @board[y][x] == @piece %>
-						<!-- Highlights the piece to move -->
+						<!-- highlights the piece to move -->
 						<td class='<%= x %> piece_to_move'>
 							<%= image_tag @piece.image_name %>
 						</td>
