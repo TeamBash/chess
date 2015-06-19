@@ -1,9 +1,4 @@
-class Knight < Piece
-  # scopes
-  def self.type
-    where(type: 'knight')
-  end
-  
+class Knight < Piece  
   def valid_move?(x, y, board)
     x_pos = self.x_position
     y_pos = self.y_position

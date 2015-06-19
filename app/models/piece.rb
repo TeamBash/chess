@@ -3,13 +3,14 @@ class Piece < ActiveRecord::Base
   belongs_to :game
 
   # scopes
-  def self.b
-    where(color: 'b')
-  end
-
-  def self.w
-    where(color: 'w')
-  end
+  scope :black,    -> { where(color: 'black') }
+  scope :white,    -> { where(color: 'white') }
+  scope :kings,    -> { where(type: 'King') }
+  scope :queens,   -> { where(type: 'Queen') }
+  scope :bishops,  -> { where(type: 'Bishop') }
+  scope :knights,  -> { where(type: 'Knight') }
+  scope :pawns,    -> { where(type: 'Pawn') }
+  scope :rooks,    -> { where(type: 'Rook') }
 
   image_name = {
    'whiteQueen' => 'pieces/wq.png',

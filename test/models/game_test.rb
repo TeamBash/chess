@@ -10,7 +10,7 @@ class GameTest < ActiveSupport::TestCase
     assert_not_empty Game.all
   end
 
-  test 'board' do
+  test 'pieces_created' do
     # populate the board
     game = FactoryGirl.build(:game)
     assert_equal 0, game.pieces.count
@@ -26,5 +26,11 @@ class GameTest < ActiveSupport::TestCase
     assert_equal 16, game.pieces.where(color: 'black').count
     assert_equal 8, game.pieces.where(color: 'white', type: 'Pawn').count
     assert_equal 8, game.pieces.where(color: 'black', type: 'Pawn').count
+  end
+
+  test 'board_state' do
+    game = FactoryGirl.create(:game)
+    board = game.get_board
+    assert_not_empty board
   end
 end

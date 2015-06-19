@@ -1,9 +1,4 @@
 class Rook < Piece
-  # scopes
-  def self.type #cap
-    where(type: 'rook')
-  end
-
   def valid_move?(x, y, board)
     x_pos = self.x_position
     y_pos = self.y_position

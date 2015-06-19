@@ -34,7 +34,10 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @board = @game.board
+    @board = @game.get_board
+    if @board.empty?
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def select
