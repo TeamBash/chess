@@ -4,6 +4,13 @@ Chess::Application.routes.draw do
   
   resources :games 
 
+  # restricts the routes created to only the show page
+  resources :games, only: [:show] do
+    # generate URL to Path - allowing us to select a piece
+    get '/select/pieces/:id', to: 'games#select', as: :piece_select
+    put '/select/pieces/:id/:y_position/:x_position', to: 'games#piece_update', as: :piece_update
+
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

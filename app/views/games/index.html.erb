@@ -1,22 +1,28 @@
-<div class="jumbotron">
-  <div class="container">
-    <h1>Example Title</h1>
-    <h2>Example subtitle</h2>
-    <br>
-    <p>Proin augue magna, sodales et finibus in, feugiat rutrum lacus. Ut volutpat ornare magna, ac fermentum ipsum tincidunt eget. Nunc ut nisi velit. Nam vitae ligula facilisis, imperdiet odio in, bibendum dui. Suspendisse sit amet lectus eget massa consequat tincidunt vel faucibus enim.</p>
-    <%= link_to '#', :class => 'btn btn-primary bt-large' do %>
-      Play Chess &raquo;
-    <% end %>
+<% if current_user %>
+  <h1><%= link_to 'Create a new Game', new_game_path %><h1>
+  <br />
+  <% @games.each do |game| %>
+    <h2><%= link_to game.name, game_path(game) %></h2>
+  <% end %>
+<% else %>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Chess Roulette</h1>
+      <h4>"Chess is a natural cerebral high. - Walter Browne"</h4>
+      <p>
+        Play with your friends. A game of strategic skill for two, 
+        on a chequered board where pieces are moved according to 
+        specific rules. The object is to put the opponent's king 
+        under a direct attack from which escape is impossible (checkmate).<br>
+      </p>
+      <%= link_to '#', :data => {:toggle => 'modal', :target => '#signUpModal'}, :class => 'btn btn-primary btn-lg' do %>
+        Play Chess &raquo;
+      <% end %>
+    </div>
+    </div>
   </div>
-  </div>
-</div>
-
-<h1><%= link_to 'Create a new Game', new_game_path %><h1>
-<br />
-<% @games.each do |game| %>
-  <h2><%= link_to game.name, game_path(game) %></h2>
 <% end %>
-
+  
 <p>
 <br /><br /><br /><br /><br /><br />
 <br /><br /><br /><br /><br /><br />

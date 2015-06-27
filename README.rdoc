@@ -32,3 +32,6 @@ Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
 {<img alt="Status?branch=master" src="https://codeship.com/projects/a7aae530-dee6-0132-a627-465ff4e7e511/status?branch=master" />}[https://codeship.com/projects/80451]
+
+![Codeship
+Status][https://codeship.com/projects/f9b145e0-ef7f-0132-1b5c-3628cb5d23b0/status?branch=master]
