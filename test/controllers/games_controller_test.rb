@@ -70,5 +70,4 @@ class GamesControllerTest < ActionController::TestCase
       delete :destroy, id: game.id
     end
   end
-
 end
