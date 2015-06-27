@@ -3,7 +3,6 @@ require 'test_helper'
 class GamesControllerTest < ActionController::TestCase
   setup do
     @user = FactoryGirl.create(:user)
-    # game  = FactoryGirl.create(:game, :user => user)
   end
 
   test 'not signed in' do
@@ -21,7 +20,9 @@ class GamesControllerTest < ActionController::TestCase
 
   test 'show found' do
     sign_in @user
+    puts @user.email
     game = FactoryGirl.create(:game)
+    puts game.white_user.email
     get :show, id: game.id
     assert_response :success
   end
