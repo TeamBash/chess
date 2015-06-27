@@ -13,18 +13,18 @@ class Piece < ActiveRecord::Base
   scope :rooks,    -> { where(type: 'Rook') }
 
   image_name = {
-   'whiteQueen' => 'pieces/wq.png',
-   'whiteKing' => 'pieces/wk.png',
-   'whiteRook' => 'pieces/wr.png',
-   'whiteBishop' => 'pieces/wb.png',
-   'whiteKnight' => 'pieces/wn.png',
-   'whitePawn' => 'pieces/wp.png',
-   'blackQueen' => 'pieces/bq.png',
-   'blackKing' => 'pieces/bk.png',
-   'blackRook' => 'pieces/br.png',
-   'blackBishop' => 'pieces/bb.png',
-   'blackKnight' => 'pieces/bn.png',
-   'blackPawn' => 'pieces/bp.png'
+   'whiteQueen'   => 'pieces/wq.png',
+   'whiteKing'    => 'pieces/wk.png',
+   'whiteRook'    => 'pieces/wr.png',
+   'whiteBishop'  => 'pieces/wb.png',
+   'whiteKnight'  => 'pieces/wn.png',
+   'whitePawn'    => 'pieces/wp.png',
+   'blackQueen'   => 'pieces/bq.png',
+   'blackKing'    => 'pieces/bk.png',
+   'blackRook'    => 'pieces/br.png',
+   'blackBishop'  => 'pieces/bb.png',
+   'blackKnight'  => 'pieces/bn.png',
+   'blackPawn'    => 'pieces/bp.png'
   }
 
   def piece_image
@@ -34,6 +34,12 @@ class Piece < ActiveRecord::Base
   def valid_move?(x, y, board)
     raise "SYSTEM ERROR: Abstract method"
   end
+  
+  # might consider adding an additional move validation method that first
+  # checks the desired move keeps the piece on the board.
+  # If new coordinates < (0,0) || > (7,7) (squishily-defined), then reject immediately
+  # include this validation in valid_move?
+  
 
   def move_to!(x, y, board)
     if x == nil
@@ -50,7 +56,8 @@ class Piece < ActiveRecord::Base
 
   def obstructed?(x, y, board)
     # checks if destination is obstructed
-    capturable = destination_obstructed?(x, y, board)
+
+    capturable = destination_obstructed(x, y, board)
     return true if capturable.nil?
 
     # checks if destination is blocked diagonally
@@ -61,7 +68,7 @@ class Piece < ActiveRecord::Base
     capturable = linear_obstructed(x, y, board)
     return true if capturable && same_color?(capturable)
 
-    # returns no obstructions if no pieces were found in path.
+    # returns false if no pieces were found in path.
     # or piece is capturable
     return false 
   end

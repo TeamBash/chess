@@ -1,8 +1,7 @@
 class Game < ActiveRecord::Base
   validates :name, presence: :true, length: { minimum: 1 }
   after_create  :create_pieces
-  attr_accessor :black_user_email
-  
+
   has_many :pieces
   delegate :pawns, :rooks, :knights, :bishops, :kings, :queens, to: :pieces
  

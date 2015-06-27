@@ -3,11 +3,11 @@ class Bishop < Piece
     x_pos = self.x_position
     y_pos = self.y_position
     
-    # not valid if the bishop moves horizonally or vertically
-    return false if x == x_pos || y == y_pos
+    # checks the bishop moves only diagonally
+    return false unless (x - x_pos).abs == (y - y_pos).abs
     
     # checks if there are any obstructions between current position and destination
-    if self.obstructed?(x, y, board)
+    if obstructed?(x, y, board)
       return false
     else
       return true

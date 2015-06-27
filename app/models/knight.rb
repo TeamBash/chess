@@ -9,8 +9,8 @@ class Knight < Piece
     # check if knight is moving the right amount of squares in L-shape
     return false unless (x - x_pos).abs == 1 && (y - y_pos).abs == 2 || (y - y_pos).abs == 1 && (x - x_pos).abs == 2
     
-    # checks if there are any obstructions between current position and destination
-    if self.obstructed?(x, y, board)
+    # checks if there are any obstructions at destination square only
+    if destination_obstructed(x, y, board).nil?
       return false
     else
       return true
