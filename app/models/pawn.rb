@@ -1,9 +1,4 @@
 class Pawn < Piece
-  # scopes
-  def self.type
-    where(type: 'pawn')
-  end
-
   def valid_move?(x, y, board)
     x_pos = self.x_position
     y_pos = self.y_position

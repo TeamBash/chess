@@ -7,23 +7,22 @@
 
 class GamesController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
-
+  
   def index
-    @games = Game.all
+    # @games = Game.all
+    @games = Game.where(black_user_id: nil)
   end
 
   def new
     @game = Game.new
   end
-
-  def invite()
+  
+  def join
   end
 
   def create
     @game = Game.new(game_params)
     @game.white_user = current_user
-    black_user = User.find_by(email: @game.black_user_email)
-    @game.black_user = black_user
 
     if @game.save
       redirect_to game_path(@game)
@@ -34,7 +33,23 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @pieces = @game.pieces
+    @board = @game.get_board
+    if @board.empty?
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+  def select
+    @game = Game.find(params[:game_id])
+    @board = @game.get_board
+    @piece = Piece.find(params[:id])
+  end
+
+  def piece_update
+    @game = Game.find(params[:game_id])
+    @piece = Piece.find(params[:id])
+    @piece.update_attributes(:x_position => params[:x_position], :y_position => params[:y_position])
+    redirect_to game_path(@game)
   end
 
   def destroy
@@ -62,6 +77,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name,:black_user_email)
+    params.require(:game).permit(:name)
   end
 end
