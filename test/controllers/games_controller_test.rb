@@ -2,12 +2,13 @@ require 'test_helper'
 
 class GamesControllerTest < ActionController::TestCase
   setup do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
     @user = FactoryGirl.create(:user)
   end
 
   test 'not signed in' do
-    # get :new
-    # assert_redirected_to new_user_session_path
+    get :new
+    assert_redirected_to new_user_session_path
     assert true
   end
 
@@ -20,9 +21,7 @@ class GamesControllerTest < ActionController::TestCase
 
   test 'show found' do
     sign_in @user
-    puts @user.email
     game = FactoryGirl.create(:game)
-    puts game.white_user.email
     get :show, id: game.id
     assert_response :success
   end
