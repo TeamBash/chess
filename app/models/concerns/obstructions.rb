@@ -1,15 +1,17 @@
 module Obstructions
-  def same_color?(a_piece)
+  extend ActiveSupport::Concern
+
+  def same_color?(piece)
     # if a piece is present and of the same color returns true
-    !a_piece.nil? && (a_piece.piece_color == self.piece_color)
+    piece && (piece.color == self.color)
   end
 
   def destination_obstructed(x, y, board)
     # determines what is at a destination x, y coordinate
-    destination = board[x][y]
+    piece = board[y][x]
 
     # determines if destination is occupied by a piece of the same color
-    same_color?(destination) ? nil : destination
+    same_color?(piece) ? nil : piece
   end
 
   def linear_obstructed(x, y, board)
@@ -17,13 +19,18 @@ module Obstructions
     x_pos = self.x_position
     y_pos = self.y_position
 
+    if x != x_pos && y != y_pos
+      # piece is moving diagonally
+      return nil
+    end
+
     if x == x_pos # piece is moving vertically
       # work out direction of incrementation
       y_increment = y > y_pos ? 1 : -1
       y_pos += y_increment
 
-      while (y - y_pos).abs > 0
-        current_sq = board[x_pos][y_pos]
+      while (y - y_pos).abs >= 0
+        current_sq = board[y_pos][x_pos]
 
         unless current_sq.nil?
           # hit something, return the first obstruction
@@ -37,10 +44,10 @@ module Obstructions
       x_increment = x > x_pos ? 1 : -1
       x_pos += x_increment
 
-      while (x - x_pos).abs > 0
-        current_sq = board[x_pos][y_pos]
+      while (x - x_pos).abs >= 0
+        current_sq = board[y_pos][x_pos]
 
-        unless current_sq.nil
+        unless current_sq.nil?
           # hit something, return the first obstruction
           return current_sq
         end
@@ -49,7 +56,7 @@ module Obstructions
       end
     end
     # no obstructions return nil
-    nil
+    return nil
   end
 
   def diagonal_obstructed(x, y, board)
@@ -70,8 +77,8 @@ module Obstructions
     y_pos += y_increment
 
     # loop through all values stopping before x, y
-    while (x - x_pos).abs > 0 && (y - y_pos).abs > 0
-      current_sq = board[x_pos][y_pos]
+    while (x - x_pos).abs >= 0 && (y - y_pos).abs >= 0
+      current_sq = board[y_pos][x_pos]
 
       unless current_sq.nil?
         # hit something, return the first obstruction
@@ -81,7 +88,8 @@ module Obstructions
       x_pos += x_increment
       y_pos += y_increment
     end
+    
     # no obstructions return nil
-    nil
+    return nil
   end
 end

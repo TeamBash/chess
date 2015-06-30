@@ -2,13 +2,13 @@ require 'test_helper'
 
 class GamesControllerTest < ActionController::TestCase
   setup do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
     @user = FactoryGirl.create(:user)
-    # game  = FactoryGirl.create(:game, :user => user)
   end
 
   test 'not signed in' do
-    # get :new
-    # assert_redirected_to new_user_session_path
+    get :new
+    assert_redirected_to new_user_session_path
     assert true
   end
 
@@ -70,4 +70,5 @@ class GamesControllerTest < ActionController::TestCase
       delete :destroy, id: game.id
     end
   end
+
 end
