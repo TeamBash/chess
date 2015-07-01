@@ -9,10 +9,10 @@ class PieceTest < ActiveSupport::TestCase
   	# create game, test piece and retrieve board
     game = FactoryGirl.create(:game)
     board = game.get_board
-    piece = board[dest_y][dest_x]
-    p = Queen.create(:y_position => 0, :x_position => 3, :type => "Queen", :color => 'black', :image_name => 'pieces/bq.png')
+    p = Queen.create(y_position: 0, x_position: 3, type: 'Queen', color: 'black', image_name: 'pieces/bq.png')
     
     # check each tests in obstructed? method separately 
+    # destination is same color, so obstruction should return nil
     obstruction = p.destination_obstructed(dest_x, dest_y, board)
     assert_nil obstruction
     
