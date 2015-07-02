@@ -17,3 +17,5 @@
 //= require_tree ../../../vendor/assets/javascripts
 //= require get_shit_done
 //= require_tree .
+
+//= require jquery-ui
