@@ -27,6 +27,16 @@ class Piece < ActiveRecord::Base
    'blackPawn'    => 'pieces/bp.png'
   }
 
+  def capture!(x, y, board)
+    captured = board[x][y]
+
+    if self.obstructed?(x, y, board) == false && self.valid_move?(x, y, board) == true 
+      captured.update_attributes(x_position: nil, y_position: nil)
+      self.update_attributes(x_position: x, y_position: y)
+    end
+  end
+
+
   def piece_image
     image_name["#{self.color}" + "#{self.type.capitalize}"]
   end
