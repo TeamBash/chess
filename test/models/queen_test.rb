@@ -45,21 +45,19 @@ class QueenTest < ActiveSupport::TestCase
     board = game.get_board
     queen = game.queens.where(color: 'black')
 
-    dest_x = 4
-    dest_y = 6
     piece_to_move = Queen.create(y_position: 4, x_position: 2, type: 'Queen', color: 'black', image_name: 'piece/bq.png')
     piece_to_capture = Pawn.create(y_position:6, x_position: 4, type: 'Pawn', color: 'white', image_name: 'piece.wp.png')
 
     actual = piece_to_move.capture!(4, 6, board)
     assert actual
 
-    piece_to_capture.reload
-    assert_nil piece_to_capture.x_position
-    assert_nil piece_to_capture.y_position
-
     piece_to_move.reload
     assert_equal 4, piece_to_move.x_position
     assert_equal 6, piece_to_move.y_position
+
+    piece_to_capture.reload
+    assert_nil piece_to_capture.x_position
+    assert_nil piece_to_capture.y_position
 
     end
   end
