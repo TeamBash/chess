@@ -28,7 +28,7 @@ class Piece < ActiveRecord::Base
   }
 
   def capture!(x, y, board)
-    captured = board[x][y]
+    captured = board[y][x]
 
     if self.obstructed?(x, y, board) == false && self.valid_move?(x, y, board) == true 
       captured.update_attributes(x_position: nil, y_position: nil)
