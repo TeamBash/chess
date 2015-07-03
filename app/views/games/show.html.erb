@@ -1,10 +1,13 @@
 <script>
   $(function() {
-    $( '.drag-me' ).draggable();
-    $( '.drop-here' ).droppable({
+    $( '.piece' ).draggable({
       update: function( event, ui ) {
-        alert("SquareId: " + ui.item.data('item-id') + " Index: " + ui.item.index());
+        alert(ui.item.index());
       }
+    });
+    $( '.tile' ).droppable({
+      hoverClass: "move-tile",
+      accept: '.piece',
     });
   });
 </script>
@@ -48,14 +51,14 @@
       <!-- # checks if the square is empty, if it is return square-->
       <% if @board[y][x].nil? %>
        <!-- #class column -->
-      <td class='drop-here <%= x %>'></td>
+      <td class='tile <%= x %>'></td>
       <% else %>
       <!-- # class column -->
-      <td class='drop-here <%= x %>'>
+      <td class='tile <%= x %>'>
        <!-- # if a piece returns true => provide link to move to a seperate board for that piece -->
         <%= link_to game_piece_select_path(@board[y][x].game_id, @board[y][x]) do %>
        <!-- # returns image of that piece -->
-        <%= image_tag @board[y][x].image_name, :class => 'drag-me responsive' %>
+        <%= image_tag @board[y][x].image_name, :class => 'piece responsive' %>
         <% end %>
       </td>
       <% end %>
