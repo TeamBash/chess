@@ -24,6 +24,15 @@ class Game < ActiveRecord::Base
     return @board
   end
 
+  def switch_players(color)
+    # ensure that game is set to correct turn
+    if color
+      update_attributes(turn: white_player_id)
+    else
+      update_attributes(turn: black_player_id)
+    end
+  end
+
   private
   
   INITIAL_PIECE_LOCATIONS = [

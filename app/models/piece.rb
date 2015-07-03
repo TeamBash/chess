@@ -28,14 +28,17 @@ class Piece < ActiveRecord::Base
   }
 
   def capture!(x, y, board)
+    # destination square 
     captured = board[y][x]
 
-    if self.obstructed?(x, y, board) == false && self.valid_move?(x, y, board) == true 
-      captured.update_attributes(x_position: nil, y_position: nil)
+    # if valid move = true
+    # move the captured piece off the board
+    # update the piece to move to destination square
+    if self.valid_move?(x, y, board) == true 
       self.update_attributes(x_position: x, y_position: y)
+      captured.update_attributes(x_position: nil, y_position: nil)
     end
   end
-
 
   def piece_image
     image_name["#{self.color}" + "#{self.type.capitalize}"]
@@ -59,6 +62,10 @@ class Piece < ActiveRecord::Base
     else
       return render text: 'Successful move', status: 'onboard'
     end
+
+    if x == nil && y == nil
+      return render text: 'This piece is captured', status: 'captured'
+    end
   end
 
   # include obstructions for obstruction checks
@@ -66,7 +73,6 @@ class Piece < ActiveRecord::Base
 
   def obstructed?(x, y, board)
     # checks if destination is obstructed
-
     capturable = destination_obstructed(x, y, board)
     return true if capturable.nil?
 
