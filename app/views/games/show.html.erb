@@ -1,16 +1,26 @@
+<script>
+  $(function() {
+    $( '.drag-me' ).draggable();
+    $( '.drop-here' ).droppable();
+  });
+
+<!-- .drop-here = droppable -->
+<!-- .drag-me = draggable -->
+</script>
+
 <h1><%= @game.name %></h1>
 
 <% if @game.black_user.nil? %>
   <%= link_to '#', :class => 'btn btn-primary btn-sm' do %>
-    Join game
+  Join game
   <% end %>
 <% end %>
 
-<%= link_to game_path(@game), :method => :delete, 
-    :class => 'btn btn-primary btn-sm',
-    :data => {
-     :confirm => 'Are you sure you want to delete this game?' } do %>
-    Delete game
+<%= link_to game_path(@game), :method => :delete,
+  :class => 'btn btn-primary btn-sm',
+  :data => {
+  :confirm => 'Are you sure you want to delete this game?' } do %>
+  Delete game
 <% end %>
 
 <%= link_to edit_game_path(@game), :class => 'btn btn-primary btn-sm' do %>
@@ -28,29 +38,29 @@
 
 <div class='col-xs-10 col-xs-offset-1' 'center'>
   <table id='chess'>
-    <!--# maping the board with row and index -->
-    <% @board.each_index do |y| %>
-      <!-- #class row -->
-      <tr class='<%= y %>' >
-        <!-- # maping the board with col and index -->
-        <% @board[y].each_index do |x| %> 
-          <!-- # checks if the square is empty, if it is return square-->
-          <% if @board[y][x].nil? %> 
-           <!-- #class column -->
-            <td class='<%= x %>'></td>
-          <% else %>
-            <!-- # class column -->
-            <td class='<%= x %>'>
-             <!-- # if a piece returns true => provide link to move to a seperate board for that piece -->
-              <%= link_to game_piece_select_path(@board[y][x].game_id, @board[y][x]) do %>
-             <!-- # returns image of that piece -->
-              <%= image_tag @board[y][x].image_name, :class => 'responsive' %>
-              <% end %>
-            </td>
-          <% end %>
+  <!--# maping the board with row and index -->
+  <% @board.each_index do |y| %>
+    <!-- #class row -->
+    <tr class='<%= y %>' >
+    <!-- # maping the board with col and index -->
+    <% @board[y].each_index do |x| %>
+      <!-- # checks if the square is empty, if it is return square-->
+      <% if @board[y][x].nil? %>
+       <!-- #class column -->
+      <td class='drop-here <%= x %>'></td>
+      <% else %>
+      <!-- # class column -->
+      <td class='<%= x %>'>
+       <!-- # if a piece returns true => provide link to move to a seperate board for that piece -->
+        <%= link_to game_piece_select_path(@board[y][x].game_id, @board[y][x]) do %>
+       <!-- # returns image of that piece -->
+        <%= image_tag @board[y][x].image_name, :class => 'drag-me responsive' %>
         <% end %>
-      </tr>
+      </td>
+      <% end %>
     <% end %>
+    </tr>
+  <% end %>
   </table>
 </div>
 
