@@ -35,6 +35,9 @@ gem 'bootstrap-sass', '~> 3.3.4'
 # Use figaro to manage private data
 gem 'figaro'
 
+# Use Font Awesome
+gem 'font-awesome-rails'
+
 # Use Simple form gem
 gem 'simple_form'
 

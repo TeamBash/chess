@@ -11,6 +11,7 @@
  *= require_self
  *= require_directory ../../../vendor/assets/stylesheets/get_shit_done
  *= require_tree .
+ *= require font-awesome
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
