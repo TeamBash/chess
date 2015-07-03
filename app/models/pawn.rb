@@ -32,8 +32,19 @@ class Pawn < Piece
     end
   end
 
-  def capture_move?
-    # LOGIC
+  def capture_move?(x, y)
+    x_direction = (x_pos - x).abs
+    y_direction = (y_pos - y).abs
+
+    capturable_piece = destination_obstructed(x, y)
+
+    # can't capture same-color pieces
+    return false if capturable_piece.color == self.color
+    # should move there instead of capturing
+    return false if capturable_piece.blank?
+    # can only capture things one tile away,
+    # this might be redundant
+    return false if x_direction > 1 && y_direction > 1
   end
 
   def en_passant?(y)
