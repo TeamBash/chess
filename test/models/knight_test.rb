@@ -35,7 +35,7 @@ class KnightTest < ActiveSupport::TestCase
     valid = knight.valid_move?(dest_x, dest_y, board)
     assert_not valid
 
-    knight = Knight.create(y_position: 4, x_position: 3, type: "Knight", color: 'black', image_name: 'pieces/bn.png')
+    knight = Knight.create(y_position: 4, x_position: 3, type: 'Knight', color: 'black', image_name: 'pieces/bn.png')
 
     # checks validation returns true for a valid move
     valid = knight.valid_move?(dest_x, dest_y, board)
