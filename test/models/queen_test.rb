@@ -48,24 +48,13 @@ class QueenTest < ActiveSupport::TestCase
     # creates queen 
     piece_to_move = Queen.create( y_position: 4, x_position: 2, type: 'Queen', color: 'black', image_name: 'piece/bq.png')
 
-    # confirms starting position of Queen
-    piece_to_move
-    assert_equal 2, piece_to_move.x_position
-    assert_equal 4, piece_to_move.y_position
-
     # creates pawn
-    piece_to_capture = Pawn.create( y_position: 6, x_position: 4, type: 'Pawn', color: 'white', image_name: 'piece.wp.png')
-
-    # confirms starting position of Pawn
-    piece_to_capture
-    assert_equal 4, piece_to_capture.x_position
-    assert_equal 6, piece_to_capture.y_position
+    piece_to_capture = board[6][4]
 
     # moves queen to capture pawn
     valid = piece_to_move.capture!(4, 6, board)
-    assert = valid
-    puts captured
-
+    assert valid
+    
     # reloads to check new position
     piece_to_move.reload
     assert_equal 4, piece_to_move.x_position

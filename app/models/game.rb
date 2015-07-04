@@ -24,6 +24,7 @@ class Game < ActiveRecord::Base
     return @board
   end
 
+
   private
   
   INITIAL_PIECE_LOCATIONS = [

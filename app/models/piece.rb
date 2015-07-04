@@ -27,6 +27,10 @@ class Piece < ActiveRecord::Base
    'blackPawn'    => 'pieces/bp.png'
   }
 
+  def piece_image
+    image_name["#{self.color}" + "#{self.type.capitalize}"]
+  end
+  
   def capture!(x, y, board)
     # destination square 
     captured = board[y][x]
@@ -34,14 +38,17 @@ class Piece < ActiveRecord::Base
     # if valid move = true
     # move the captured piece off the board
     # update the piece to move to destination square
+    
     if self.valid_move?(x, y, board) == true 
       self.update_attributes(x_position: x, y_position: y)
-      captured.update_attributes(x_position: nil, y_position: nil)
+      
+      if captured.nil?
+        return nil
+      else
+        captured.update_attributes(x_position: nil, y_position: nil)
+        return captured
+      end
     end
-  end
-
-  def piece_image
-    image_name["#{self.color}" + "#{self.type.capitalize}"]
   end
 
   def valid_move?(x, y, board)
@@ -53,20 +60,6 @@ class Piece < ActiveRecord::Base
   # If new coordinates < (0,0) || > (7,7) (squishily-defined), then reject immediately
   # include this validation in valid_move?
   
-
-  def move_to!(x, y, board)
-    if x == nil
-      return render text: 'Not Allowed', status: 'offboard' 
-    elsif obstructed?(x, y, board)
-      return render text: 'Move is obstructed', status: 'obstructed'
-    else
-      return render text: 'Successful move', status: 'onboard'
-    end
-
-    if x == nil && y == nil
-      return render text: 'This piece is captured', status: 'captured'
-    end
-  end
 
   # include obstructions for obstruction checks
   include Obstructions
