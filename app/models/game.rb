@@ -24,6 +24,7 @@ class Game < ActiveRecord::Base
     return @board
   end
 
+
   private
   
   INITIAL_PIECE_LOCATIONS = [
@@ -70,7 +71,7 @@ class Game < ActiveRecord::Base
       self.pieces.create(piece)
     end
   end
-  
+
   def must_have_both_user
     return unless self.black_user.nil? && self.white_user.nil?
     self.errors.add(:base, 'must have two')

@@ -41,4 +41,4 @@ class KnightTest < ActiveSupport::TestCase
     valid = knight.valid_move?(dest_x, dest_y, board)
     assert valid
   end
-end
+

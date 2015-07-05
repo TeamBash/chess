@@ -30,6 +30,26 @@ class Piece < ActiveRecord::Base
   def piece_image
     image_name["#{self.color}" + "#{self.type.capitalize}"]
   end
+  
+  def capture!(x, y, board)
+    # destination square 
+    captured = board[y][x]
+
+    # if valid move = true
+    # move the captured piece off the board
+    # update the piece to move to destination square
+    
+    if self.valid_move?(x, y, board) == true 
+      self.update_attributes(x_position: x, y_position: y)
+      
+      if captured.nil?
+        return nil
+      else
+        captured.update_attributes(x_position: nil, y_position: nil)
+        return captured
+      end
+    end
+  end
 
   def valid_move?(x, y, board)
     raise "SYSTEM ERROR: Abstract method"
@@ -41,22 +61,11 @@ class Piece < ActiveRecord::Base
   # include this validation in valid_move?
   
 
-  def move_to!(x, y, board)
-    if x == nil
-      return render text: 'Not Allowed', status: 'offboard' 
-    elsif obstructed?(x, y, board)
-      return render text: 'Move is obstructed', status: 'obstructed'
-    else
-      return render text: 'Successful move', status: 'onboard'
-    end
-  end
-
   # include obstructions for obstruction checks
   include Obstructions
 
   def obstructed?(x, y, board)
     # checks if destination is obstructed
-
     capturable = destination_obstructed(x, y, board)
     return true if capturable.nil?
 

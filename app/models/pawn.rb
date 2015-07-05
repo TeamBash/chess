@@ -4,10 +4,11 @@ class Pawn < Piece
     y_pos = self.y_position
 
     # cannot move backwards
-    return false if (color == black && (self.y_pos - y).abs < y) || (color == white && (self.y_pos - y).abs > y)
+    return false if (self.color == black && self.y_pos - y > 0)
+    return false if (self.color == white && self.y_pos - y < 0)
 
     # cannot move horizontally except to capture
-    if capture_move?
+    if capture_move?(x, y)
       # then it's cool to move diagonally one space
       return false if (self.x_pos - x).abs > 1
     else
@@ -25,15 +26,20 @@ class Pawn < Piece
     end
 
     # checks if there are any obstructions at destination square only
-    if destination_obstructed(x, y, board).nil?
+    if obstructed?(x, y, board)
       return false
     else
       return true
     end
   end
 
-  def capture_move?
-    # LOGIC
+  def capture_move?(x, y)
+    # not a capture move if moving horizontally or vertically
+    return false if (self.x_position == x) || (self.y_position == y)
+    # cannot capture a piece more than a square away
+    return false if (self.x_position - x).abs > 1 || (self.y_position - y).abs > 1
+    # otherwise returns true
+    return true
   end
 
   def en_passant?(y)
