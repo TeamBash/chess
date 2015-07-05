@@ -3,21 +3,15 @@ class Pawn < Piece
     x_pos = self.x_position
     y_pos = self.y_position
 
+    # cannot move horizontally
+    return false if y_pos == y
+    
     # cannot move backwards
-    return false if (self.color == black && self.y_pos - y > 0)
-    return false if (self.color == white && self.y_pos - y < 0)
-
-    # cannot move horizontally except to capture
-    if capture_move?(x, y)
-      # then it's cool to move diagonally one space
-      return false if (self.x_pos - x).abs > 1
-    else
-      # it's not cool to move horizontally
-      return false if (self.x_pos - x).abs > x
-    end
-
+    return false if (self.color == black && y_pos - y > 0)
+    return false if (self.color == white && y_pos - y < 0)
+    
     # if it's the first move, checks if it's hopping too much
-    if first_move?
+    if first_move
       # if first move, can move two spaces forward but not diagonally
       return false if (self.y_pos - y).abs > 2
     else
@@ -25,17 +19,19 @@ class Pawn < Piece
       return false if (self.y_pos - y).abs > 1
     end
 
-    # checks if there are any obstructions at destination square only
-    if obstructed?(x, y, board)
-      return false
-    else
-      return true
+    unless capture_move?(x, y) || x_pos == x
+      # checks if there are any obstructions at destination square only
+      if obstructed?(x, y, board)
+        return false
+      else
+        return true
+      end
     end
   end
 
   def capture_move?(x, y)
-    # not a capture move if moving horizontally or vertically
-    return false if (self.x_position == x) || (self.y_position == y)
+    # not a capture move if moving vertically
+    return false if (self.x_position == x)
     # cannot capture a piece more than a square away
     return false if (self.x_position - x).abs > 1 || (self.y_position - y).abs > 1
     # otherwise returns true
@@ -53,7 +49,7 @@ class Pawn < Piece
     end
   end
 
-  def first_move?
-    (y_pos == 1 && color == white) || (y_pos == 6 && color == black)
-  end
+  # def first_moved?
+  #   (y_pos == 1 && color == white) || (y_pos == 6 && color == black)
+  # end
 end

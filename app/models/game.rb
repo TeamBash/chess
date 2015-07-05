@@ -69,6 +69,7 @@ class Game < ActiveRecord::Base
   def create_pieces
     INITIAL_PIECE_LOCATIONS.each do |piece|
       self.pieces.create(piece)
+      self.pieces.last.first_move = true
     end
   end
 
