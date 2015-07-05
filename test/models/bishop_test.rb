@@ -24,7 +24,7 @@ class BishopTest < ActiveSupport::TestCase
     dest_x = 4
   	dest_y = 6
   	
-    bishop = Bishop.create(:y_position => 3, :x_position => 4, :type => "Bishop", :color => 'black', :image_name => 'pieces/bb.png')
+    bishop = Bishop.create(y_position: 3, x_position: 4, type: 'Bishop', color: 'black', image_name: 'pieces/bb.png')
     
     # checks that a capturable piece is not an obstruction
     obstruction = bishop.obstructed?(dest_x, dest_y, board)
@@ -35,7 +35,7 @@ class BishopTest < ActiveSupport::TestCase
     valid = bishop.valid_move?(dest_x, dest_y, board)
     assert_not valid
 
-    bishop = Bishop.create(:y_position => 2, :x_position => 0, :type => "Bishop", :color => 'black', :image_name => 'pieces/bb.png')
+    bishop = Bishop.create(y_position: 2, x_position: 0, type: 'Bishop', color: 'black', image_name: 'pieces/bb.png')
     
     # checks validation returns true for a valid move
     valid = bishop.valid_move?(dest_x, dest_y, board)
