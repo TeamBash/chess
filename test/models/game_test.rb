@@ -33,4 +33,35 @@ class GameTest < ActiveSupport::TestCase
     board = game.get_board
     assert_not_empty board
   end
+
+  test 'check' do
+    game = FactoryGirl.create(:game)
+    board = game.get_board
+
+    black_queen = Queen.create( y_position: 2, x_position: 4, type: 'Queen', color: 'black', image_name: 'piece/bq.png')
+    
+    piece_to_capture = board[6][4]
+    
+    # move black_queen to check white_king
+    black_queen.move_to!(4, 6, board)
+   
+    valid = black_queen.valid_move?(4, 7, board)
+    assert valid 
+
+    assert_equal true, game.in_check?('white')
+  end
 end
+
+# y = row 
+# x = col
+
+#   0 1 2 3 4 5 6 7
+# 0 - - - - - - - -
+# 1 - - - - - - - -
+# 2 - - - - Q - - -
+# 3 - - - - - - - -
+# 4 - - - - - - - -
+# 5 - - - - - - - -
+# 6 - - - - Q - - -
+# 7 - - - - K - - -
+

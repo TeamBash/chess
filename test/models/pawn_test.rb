@@ -2,12 +2,12 @@ require 'test_helper'
 
 class PawnTest < ActiveSupport::TestCase
   test 'valid_move_working' do
-  	# set destination square's x & y positions 
-  	# to be pawn of the same color
-  	dest_x = 3
-  	dest_y = 1
+    # set destination square's x & y positions 
+    # to be pawn of the same color
+    dest_x = 3
+    dest_y = 1
 
-  	# create game, knight piece and get board
+    # create game, knight piece and get board
     game = FactoryGirl.create(:game)
     board = game.get_board
     pawn = game.pawns.where(color: 'black')
@@ -19,11 +19,11 @@ class PawnTest < ActiveSupport::TestCase
     assert_not valid
     
     # set destination square's x & y positions 
-  	# to be pawn of the opposing color 
-  	# but moving in a linear direction
+    # to be pawn of the opposing color 
+    # but moving in a linear direction
     dest_x = 4
-  	dest_y = 6
-  	
+    dest_y = 6
+    
     pawn = pawn.create(y_position: 3, x_position: 3, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png')
     
     # checks that a capturable piece is not an obstruction

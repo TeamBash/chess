@@ -31,28 +31,32 @@ class Piece < ActiveRecord::Base
     image_name["#{self.color}" + "#{self.type.capitalize}"]
   end
   
-  def capture!(x, y, board)
+  def move_to!(x, y, board)
     # destination square 
-    captured = board[y][x]
+    dest_square = board[y][x]
 
     # if valid move = true
     # move the captured piece off the board
     # update the piece to move to destination square
-    
     if self.valid_move?(x, y, board) == true 
       self.update_attributes(x_position: x, y_position: y)
       
-      if first_move
-        self.first_move = false
-      end
+     # if first_move
+     #   self.first_move = false
+     # end
       
-      if captured.nil?
+      if dest_square.nil?
         return nil
       else
-        captured.update_attributes(x_position: nil, y_position: nil)
-        return captured
+        dest_square.update_attributes(x_position: nil, y_position: nil, state: 'captured')
+        return dest_square
       end
     end
+  end
+
+
+  def captured_pieces
+    pieces.where(state: 'off-board')
   end
 
   def valid_move?(x, y, board)
