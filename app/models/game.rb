@@ -40,10 +40,8 @@ class Game < ActiveRecord::Base
     
     king_x = check_king.x_position
     king_y = check_king.y_position
-    
-    opponent_pieces = self.pieces.where(color: opponent_color)
 
-    opponent_pieces.each do |piece|
+    opponent.each do |piece|
       if piece.x_position != nil && piece.valid_move?(king_x, king_y, @board)
         return true
       end
