@@ -25,7 +25,7 @@ class Game < ActiveRecord::Base
   end
 
   def pieces_on_board(color)
-    pieces.where(:status == !'captured').to_a
+    pieces.where(color: color).where(state: nil)
   end
 
   def in_check?(color)
@@ -35,14 +35,16 @@ class Game < ActiveRecord::Base
       opponent_color = "white"
     end 
 
+    # finds the first record matching 
     check_king = pieces.find_by(type: 'King', color: color)
-    opponent = pieces_on_board(!color)
-    
+    opponent = pieces_on_board(opponent_color)
+    pieces_on_board('white')
+
     king_x = check_king.x_position
     king_y = check_king.y_position
-
+  
     opponent.each do |piece|
-      if piece.x_position != nil && piece.valid_move?(king_x, king_y, @board)
+      if piece.valid_move?(king_x, king_y, @board)
         return true
       end
     end 
@@ -50,7 +52,7 @@ class Game < ActiveRecord::Base
   end
 
   def pieces_captured(color)
-    pieces.where(:status == 'captured').to_a
+    pieces.where(:state => 'captured').to_a
   end
 
   private
@@ -97,7 +99,7 @@ class Game < ActiveRecord::Base
   def create_pieces
     INITIAL_PIECE_LOCATIONS.each do |piece|
       self.pieces.create(piece)
-    # self.pieces.last.first_move = true
+     self.pieces.last.first_move = true
     end 
   end
 
