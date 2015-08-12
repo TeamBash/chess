@@ -54,11 +54,6 @@ class Piece < ActiveRecord::Base
     end
   end
 
-
-  def captured_pieces
-    pieces.where(state: 'off-board')
-  end
-
   def valid_move?(x, y, board)
     raise "SYSTEM ERROR: Abstract method"
   end
