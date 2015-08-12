@@ -2,10 +2,10 @@ require 'test_helper'
 
 class PawnTest < ActiveSupport::TestCase
   test 'valid_move_working' do
-  	# set destination square's x & y positions 
-  	# to be pawn of the same color
-  	dest_x = 3
-  	dest_y = 1
+    # set destination square's x & y positions 
+    # to be pawn of the same color
+    dest_x = 3
+    dest_y = 1
 
   	# create game, pawn piece and get board
     game = FactoryGirl.create(:game)
@@ -19,8 +19,8 @@ class PawnTest < ActiveSupport::TestCase
     assert_not valid
     
     # set destination square's x & y positions 
-  	# to be pawn of the opposing color 
-  	# but moving in a linear direction
+    # to be pawn of the opposing color 
+    # but moving in a linear direction
     dest_x = 4
   	dest_y = 6
   	

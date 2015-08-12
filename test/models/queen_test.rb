@@ -39,11 +39,10 @@ class QueenTest < ActiveSupport::TestCase
     assert valid
   end
 
-  test 'capture' do
+    test 'capture' do
     # create game, queen piece and get board
     game = FactoryGirl.create(:game)
     board = game.get_board
-    queen = game.queens.where(color: 'black')
 
     # creates queen 
     piece_to_move = Queen.create( y_position: 4, x_position: 2, type: 'Queen', color: 'black', image_name: 'piece/bq.png')
@@ -52,9 +51,10 @@ class QueenTest < ActiveSupport::TestCase
     piece_to_capture = board[6][4]
 
     # moves queen to capture pawn
-    valid = piece_to_move.capture!(4, 6, board)
-    assert valid
-    
+
+    valid = piece_to_move.move_to!(4, 6, board)
+    assert = valid
+
     # reloads to check new position
     piece_to_move.reload
     assert_equal 4, piece_to_move.x_position

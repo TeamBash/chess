@@ -30,6 +30,9 @@ class Pawn < Piece
   end
 
   def capture_move?(x, y)
+    x_pos = self.x_position
+    y_pos = self.y_position
+
     # not a capture move if moving vertically
     return false if (self.x_position == x)
     # cannot capture a piece more than a square away
