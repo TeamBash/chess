@@ -45,7 +45,7 @@ class Game < ActiveRecord::Base
 
     king_x = check_king.x_position
     king_y = check_king.y_position
-    board = get_board
+    board = self.get_board
   
     opponent.each do |piece|
       return true if piece.valid_move?(king_x, king_y, board)
