@@ -6,8 +6,7 @@ class Queen < Piece
     # check to see if queen is moving irregularly
     # ie queen cannot move (0,3) => (4,4)
     # return false unless queen moves diagonially, vertically or horizontially 
-    return false unless (x - x_pos).abs == (y - y_pos).abs || 
-    x = x_pos && y != y_pos || x != x_pos && y = y_pos
+    return false unless (x - x_pos).abs == (y - y_pos).abs ||  x == x_pos || y == y_pos
     
     # checks if there are any obstructions between current position and destination
     if obstructed?(x, y, board)

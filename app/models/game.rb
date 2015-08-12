@@ -24,53 +24,101 @@ class Game < ActiveRecord::Base
     return @board
   end
 
+  # def in_check?(color)
+  #   check_king = pieces.find_by(type: 'King', color: color)
+  #   opponent = pieces_on_board(!color)
+    
+  #   king_x = check_king.x_position
+  #   king_y = check_king.y_position
+
+  def pieces_on_board(color)
+    pieces.where(color: color).where(state: nil)
+  end
+
+  def in_check?(color)
+    if color == "white"
+      opponent_color = "black"
+    else
+      opponent_color = "white"
+    end 
+
+    opponent_pieces = self.pieces.where(color: opponent_color)
+    
+    opponent_pieces.each do |piece|
+      if pieces.x_position != nil && piece.move?(king_x, king_y)
+
+    # finds the first record matching 
+    check_king = pieces.find_by(type: 'King', color: color)
+    opponent = pieces_on_board(opponent_color)
+    pieces_on_board('white')
+
+    king_x = check_king.x_position
+    king_y = check_king.y_position
+  
+    opponent.each do |piece|
+      if piece.valid_move?(king_x, king_y, @board)
+        return true
+      end
+    end 
+    return false
+  end
+
+  def pieces_captured(color)
+    pieces.where(:state => 'captured').to_a
+  end
+
+
   private
   
   INITIAL_PIECE_LOCATIONS = [
      #<-------------------------------Black Pieces--------------------------------------------------------->
-    {:y_position => 0, :x_position => 0, :type => "Rook", :color => 'black', :image_name => 'pieces/br.png'},
-    {:y_position => 0, :x_position => 1, :type => "Knight", :color => 'black', :image_name => 'pieces/bn.png'},
-    {:y_position => 0, :x_position => 2, :type => "Bishop", :color => 'black', :image_name => 'pieces/bb.png'},
-    {:y_position => 0, :x_position => 3, :type => "Queen", :color => 'black', :image_name => 'pieces/bq.png'},
-    {:y_position => 0, :x_position => 4, :type => "King", :color => 'black', :image_name => 'pieces/bk.png'},
-    {:y_position => 0, :x_position => 5, :type => "Bishop", :color => 'black', :image_name => 'pieces/bb.png'},
-    {:y_position => 0, :x_position => 6, :type => "Knight", :color => 'black', :image_name => 'pieces/bn.png'},
-    {:y_position => 0, :x_position => 7, :type => "Rook", :color => 'black', :image_name => 'pieces/br.png'},
+    {y_position: 0, x_position: 0, type: 'Rook',   color: 'black', image_name: 'pieces/br.png'},
+    {y_position: 0, x_position: 1, type: 'Knight', color: 'black', image_name: 'pieces/bn.png'},
+    {y_position: 0, x_position: 2, type: 'Bishop', color: 'black', image_name: 'pieces/bb.png'},
+    {y_position: 0, x_position: 3, type: 'Queen',  color: 'black', image_name: 'pieces/bq.png'},
+    {y_position: 0, x_position: 4, type: 'King',   color: 'black', image_name: 'pieces/bk.png'},
+    {y_position: 0, x_position: 5, type: 'Bishop', color: 'black', image_name: 'pieces/bb.png'},
+    {y_position: 0, x_position: 6, type: 'Knight', color: 'black', image_name: 'pieces/bn.png'},
+    {y_position: 0, x_position: 7, type: 'Rook',   color: 'black', image_name: 'pieces/br.png'},
 
-    {:y_position => 1, :x_position => 0, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
-    {:y_position => 1, :x_position => 1, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
-    {:y_position => 1, :x_position => 2, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
-    {:y_position => 1, :x_position => 3, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
-    {:y_position => 1, :x_position => 4, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
-    {:y_position => 1, :x_position => 5, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
-    {:y_position => 1, :x_position => 6, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
-    {:y_position => 1, :x_position => 7, :type => "Pawn", :color => 'black', :image_name => 'pieces/bp.png'},
+    {y_position: 1, x_position: 0, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
+    {y_position: 1, x_position: 1, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
+    {y_position: 1, x_position: 2, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
+    {y_position: 1, x_position: 3, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
+    {y_position: 1, x_position: 4, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
+    {y_position: 1, x_position: 5, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
+    {y_position: 1, x_position: 6, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
+    {y_position: 1, x_position: 7, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png'},
     #<-------------------------------White Pieces--------------------------------------------------------->
-    {:y_position => 6, :x_position => 0, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
-    {:y_position => 6, :x_position => 1, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
-    {:y_position => 6, :x_position => 2, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
-    {:y_position => 6, :x_position => 3, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
-    {:y_position => 6, :x_position => 4, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
-    {:y_position => 6, :x_position => 5, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
-    {:y_position => 6, :x_position => 6, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
-    {:y_position => 6, :x_position => 7, :type => "Pawn", :color => 'white', :image_name => 'pieces/wp.png'},
+    {y_position: 6, x_position: 0, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
+    {y_position: 6, x_position: 1, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
+    {y_position: 6, x_position: 2, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
+    {y_position: 6, x_position: 3, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
+    {y_position: 6, x_position: 4, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
+    {y_position: 6, x_position: 5, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
+    {y_position: 6, x_position: 6, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
+    {y_position: 6, x_position: 7, type: 'Pawn', :color => 'white', image_name: 'pieces/wp.png'},
 
-    {:y_position => 7, :x_position => 0, :type => "Rook", :color => 'white', :image_name => 'pieces/wr.png'},
-    {:y_position => 7, :x_position => 1, :type => "Knight", :color => 'white', :image_name => 'pieces/wn.png'},
-    {:y_position => 7, :x_position => 2, :type => "Bishop", :color => 'white', :image_name => 'pieces/wb.png'},
-    {:y_position => 7, :x_position => 3, :type => "Queen", :color => 'white', :image_name => 'pieces/wq.png'},
-    {:y_position => 7, :x_position => 4, :type => "King", :color => 'white', :image_name => 'pieces/wk.png'},
-    {:y_position => 7, :x_position => 5, :type => "Bishop", :color => 'white', :image_name => 'pieces/wb.png'},
-    {:y_position => 7, :x_position => 6, :type => "Knight", :color => 'white', :image_name => 'pieces/wn.png'},
-    {:y_position => 7, :x_position => 7, :type => "Rook", :color => 'white', :image_name => 'pieces/wr.png'},
+    {y_position: 7, :x_position => 0, type: 'Rook',   :color => 'white', image_name: 'pieces/wr.png'},
+    {y_position: 7, :x_position => 1, type: 'Knight', :color => 'white', image_name: 'pieces/wn.png'},
+    {y_position: 7, :x_position => 2, type: 'Bishop', :color => 'white', image_name: 'pieces/wb.png'},
+    {y_position: 7, :x_position => 3, type: 'Queen',  :color => 'white', image_name: 'pieces/wq.png'},
+    {y_position: 7, :x_position => 4, type: 'King',   :color => 'white', image_name: 'pieces/wk.png'},
+    {y_position: 7, :x_position => 5, type: 'Bishop', :color => 'white', image_name: 'pieces/wb.png'},
+    {y_position: 7, :x_position => 6, type: 'Knight', :color => 'white', image_name: 'pieces/wn.png'},
+    {y_position: 7, :x_position => 7, type: 'Rook',   :color => 'white', image_name: 'pieces/wr.png'},
   ]
 
   def create_pieces
     INITIAL_PIECE_LOCATIONS.each do |piece|
       self.pieces.create(piece)
     end
+    
+    self.pieces.each do |piece|
+      piece.first_move = true
+    end
   end
-  
+
   def must_have_both_user
     return unless self.black_user.nil? && self.white_user.nil?
     self.errors.add(:base, 'must have two')
