@@ -76,4 +76,4 @@ class QueenTest < ActiveSupport::TestCase
   # 4 n n n n n n n n
   # 5 n n n n n n n n
   # 6 n n n n P n n n
-  # 7 n n n n n n n n
+  # 7 n n n n k n n n

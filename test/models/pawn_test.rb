@@ -7,7 +7,7 @@ class PawnTest < ActiveSupport::TestCase
   	dest_x = 3
   	dest_y = 1
 
-  	# create game, knight piece and get board
+  	# create game, pawn piece and get board
     game = FactoryGirl.create(:game)
     board = game.get_board
     pawn = game.pawns.where(color: 'black')
@@ -24,7 +24,7 @@ class PawnTest < ActiveSupport::TestCase
     dest_x = 4
   	dest_y = 6
   	
-    pawn = pawn.create(y_position: 3, x_position: 3, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png')
+    pawn = pawn.create(y_position: 3, x_position: 3, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png', first_move: true)
     
     # checks that a capturable piece is not an obstruction
     obstruction = pawn.obstructed?(dest_x, dest_y, board)
@@ -35,7 +35,7 @@ class PawnTest < ActiveSupport::TestCase
     valid = pawn.valid_move?(dest_x, dest_y, board)
     assert_not valid
 
-    pawn = Pawn.create(y_position: 4, x_position: 3, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png')
+    pawn = Pawn.create(y_position: 4, x_position: 3, type: 'Pawn', color: 'black', image_name: 'pieces/bp.png', first_move: true)
 
     # checks validation returns true for a valid move
     valid = pawn.valid_move?(dest_x, dest_y, board)

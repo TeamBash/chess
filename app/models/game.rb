@@ -24,6 +24,27 @@ class Game < ActiveRecord::Base
     return @board
   end
 
+  def in_check?(color)
+    check_king = pieces.find_by(type: 'King', color: color)
+    opponent = pieces_on_board(!color)
+    
+    king_x = check_king.x_position
+    king_y = check_king.y_position
+    
+    if color == "white"
+      opponent_color = "black"
+    else
+      opponent_color = "white"
+    end 
+    
+    opponent_pieces = self.pieces.where(color: opponent_color)
+    opponent_pieces.each do |piece|
+      if pieces.x_position != nil && piece.move?(king_x, king_y)
+        return true
+      end
+    end 
+    return false
+  end
 
   private
   
@@ -69,7 +90,10 @@ class Game < ActiveRecord::Base
   def create_pieces
     INITIAL_PIECE_LOCATIONS.each do |piece|
       self.pieces.create(piece)
-      self.pieces.last.first_move = true
+    end
+    
+    self.pieces.each do |piece|
+      piece.first_move = true
     end
   end
 

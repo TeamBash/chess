@@ -42,7 +42,7 @@ class Piece < ActiveRecord::Base
     if self.valid_move?(x, y, board) == true 
       self.update_attributes(x_position: x, y_position: y)
       
-      if first_move
+      if self.first_move
         self.first_move = false
       end
       

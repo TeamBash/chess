@@ -7,16 +7,16 @@ class Pawn < Piece
     return false if y_pos == y
     
     # cannot move backwards
-    return false if (self.color == black && y_pos - y > 0)
-    return false if (self.color == white && y_pos - y < 0)
+    return false if (self.color == 'black' && y_pos - y > 0)
+    return false if (self.color == 'white' && y_pos - y < 0)
     
     # if it's the first move, checks if it's hopping too much
-    if first_move
+    if self.first_move
       # if first move, can move two spaces forward but not diagonally
-      return false if (self.y_pos - y).abs > 2
+      return false if (y_pos - y).abs > 2
     else
       # cannot move more than one spot
-      return false if (self.y_pos - y).abs > 1
+      return false if (y_pos - y).abs > 1
     end
 
     unless capture_move?(x, y) || x_pos == x
@@ -39,8 +39,8 @@ class Pawn < Piece
   end
 
   def en_passant?(y)
-    y_direction = (y - y_pos).abs
-    if first_move?
+    y_direction = (y - self.y_position).abs
+    if self.first_move
       true
     elsif (y_direction == 1 || y_direction == 2)
       true
@@ -49,7 +49,7 @@ class Pawn < Piece
     end
   end
 
-  # def first_moved?
+  # def first_move?
   #   (y_pos == 1 && color == white) || (y_pos == 6 && color == black)
   # end
 end
