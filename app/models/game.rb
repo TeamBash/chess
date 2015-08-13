@@ -24,17 +24,14 @@ class Game < ActiveRecord::Base
     return @board
   end
 
-  # def in_check?(color)
-  #   check_king = pieces.find_by(type: 'King', color: color)
-  #   opponent = pieces_on_board(!color)
-    
-  #   king_x = check_king.x_position
-  #   king_y = check_king.y_position
-
   def pieces_on_board(color)
-    pieces.where(color: color).where(state: nil)
+    self.pieces.where(color: color).where(state: nil)
   end
 
+  def pieces_captured(color)
+    self.pieces.where(state: 'captured')
+  end
+  
   def in_check?(color)
     if color == "white"
       opponent_color = "black"
@@ -42,31 +39,18 @@ class Game < ActiveRecord::Base
       opponent_color = "white"
     end 
 
-    opponent_pieces = self.pieces.where(color: opponent_color)
-    
-    opponent_pieces.each do |piece|
-      if pieces.x_position != nil && piece.move?(king_x, king_y)
-
     # finds the first record matching 
     check_king = pieces.find_by(type: 'King', color: color)
     opponent = pieces_on_board(opponent_color)
-    pieces_on_board('white')
 
     king_x = check_king.x_position
     king_y = check_king.y_position
   
     opponent.each do |piece|
-      if piece.valid_move?(king_x, king_y, @board)
-        return true
-      end
+      return true if piece.valid_move?(king_x, king_y, @board)
     end 
     return false
   end
-
-  def pieces_captured(color)
-    pieces.where(:state => 'captured').to_a
-  end
-
 
   private
   
@@ -116,6 +100,7 @@ class Game < ActiveRecord::Base
     
     self.pieces.each do |piece|
       piece.first_move = true
+      piece.state = nil
     end
   end
 

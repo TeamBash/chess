@@ -1,7 +1,8 @@
 <h1><%= @game.name %></h1>
 
 <% if @game.black_user.nil? %>
-  <%= link_to '#', :class => 'btn btn-primary btn-sm' do %>
+  <%= link_to game_join_path(@game), :method => :join, 
+    :class => 'btn btn-primary btn-sm' do %>
     Join game
   <% end %>
 <% end %>
@@ -18,10 +19,10 @@
 <% end %>
 
 <h5>White Player: <%= @game.white_user.email %></h5>
-<% if @game.black_user.nil? %>
-  <h5>Black Player: ?? </h5>
-<% else %>
+<% if @game.black_user %>
   <h5>Black Player: <%= @game.black_user.email %></h5>
+<% else %>
+  <h5>Black Player: ?? </h5>
 <% end %>
 
 <br><br>

@@ -9,8 +9,9 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, :only => [:new, :create, :edit, :update, :destroy]
   
   def index
-    # @games = Game.all
-    @games = Game.where(black_user_id: nil)
+    @games = Game.all
+    # @games = Game.where(black_user_id: nil)
+
   end
 
   def new
@@ -18,6 +19,16 @@ class GamesController < ApplicationController
   end
   
   def join
+    @game = Game.find(params[:game_id])
+    if @game.white_user != current_user
+      @game.black_user = current_user
+      flash.alert = 'Black player joined!'
+      @game.save
+      redirect_to game_path(@game)
+    else
+      flash.alert = 'Failed to add opponent!'
+      redirect_to game_path(@game)
+    end
   end
 
   def create
