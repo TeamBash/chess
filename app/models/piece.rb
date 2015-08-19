@@ -38,7 +38,7 @@ class Piece < ActiveRecord::Base
     # if valid move = true
     # move the captured piece off the board
     # update the piece to move to destination square
-    if self.valid_move?(x, y, board) == true &&
+    if self.valid_move?(x, y, board) == true
       self.update_attributes(x_position: x, y_position: y)
       
       if self.first_move
