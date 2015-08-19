@@ -23,15 +23,9 @@ class Game < ActiveRecord::Base
     end
     return @board
   end
-
-  def pieces_on_board(color)
-    self.pieces.where(color: color).where(state: nil)
-  end
-
-  def pieces_captured(color)
-    self.pieces.where(state: 'captured')
-  end
   
+  include PiecesState
+
   def in_check?(color)
     if color == "white"
       opponent_color = "black"

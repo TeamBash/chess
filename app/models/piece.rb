@@ -30,7 +30,7 @@ class Piece < ActiveRecord::Base
   def piece_image
     image_name["#{self.color}" + "#{self.type.capitalize}"]
   end
-  
+
   def move_to!(x, y, board)
     # destination square 
     dest_square = board[y][x]
@@ -38,7 +38,7 @@ class Piece < ActiveRecord::Base
     # if valid move = true
     # move the captured piece off the board
     # update the piece to move to destination square
-    if self.valid_move?(x, y, board) == true
+    if self.valid_move?(x, y, board) == true &&
       self.update_attributes(x_position: x, y_position: y)
       
       if self.first_move
@@ -52,6 +52,20 @@ class Piece < ActiveRecord::Base
         return dest_square
       end
     end
+  end
+
+  include PiecesState
+
+  # used for check_mate - i.e. piece cannot be capture that is putting king in check
+  def can_be_captured?
+    opponents = game.pieces_on_board(!color)
+    opponents.each do |opponent|
+      # for each opponent, see if the checking piece can be captured
+      if opponent.valid_move?(x_position, y_position, @board)
+        return true
+      end
+    end
+    false
   end
 
   def valid_move?(x, y, board)
@@ -69,7 +83,6 @@ class Piece < ActiveRecord::Base
   # If new coordinates < (0,0) || > (7,7) (squishily-defined), then reject immediately
   # include this validation in valid_move?
   
-
   # include obstructions for obstruction checks
   include Obstructions
 

@@ -39,7 +39,19 @@ class PieceTest < ActiveSupport::TestCase
 
     valid = black_pawn.move_to!(1, 1, board)
     assert_not valid
+  end
 
+  test 'can be captured' do
+    game = FactoryGirl.create(:game)
+    board = game.get_board
+
+    black_queen = Queen.create(y_position: 4, x_position: 4, type: 'Queen', color: 'black', image_name: 'pieces/bq.png')
+
+    # queen can capture this pawn
+    piece_to_capture = board[6][4]
+
+    valid = piece_to_capture.can_be_captured?
+    assert = valid
   end
 end
 
