@@ -38,7 +38,7 @@ class Piece < ActiveRecord::Base
     # if valid move = true
     # move the captured piece off the board
     # update the piece to move to destination square
-    if self.valid_move?(x, y, board) == true 
+    if self.valid_move?(x, y, board) == true
       self.update_attributes(x_position: x, y_position: y)
       
       if self.first_move
@@ -55,6 +55,12 @@ class Piece < ActiveRecord::Base
   end
 
   def valid_move?(x, y, board)
+    x_pos = self.x_position
+    y_pos = self.y_position
+
+    # cannot move to same spot
+    return false if x == x_pos && y == y_pos
+
     raise "SYSTEM ERROR: Abstract method"
   end
   

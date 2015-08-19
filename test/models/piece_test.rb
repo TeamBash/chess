@@ -29,4 +29,31 @@ class PieceTest < ActiveSupport::TestCase
     obstruction = p.obstructed?(dest_x, dest_y, board)
     assert obstruction
   end
+
+  test 'not valid to not move a piece' do
+    game = FactoryGirl.create(:game)
+    board = game.get_board
+
+    black_pawn = board[1][1]
+
+
+    valid = black_pawn.move_to!(1, 1, board)
+    assert_not valid
+
+  end
 end
+
+
+#by_bug
+# y = row 
+# x = col
+
+#   0 1 2 3 4 5 6 7
+# 0 - - - - - - - -
+# 1 - - - - - - - -
+# 2 - - - - Q - - -
+# 3 - - - - - - - -
+# 4 - - - - - - - -
+# 5 - - - - - - - -
+# 6 - - - - P - - -
+# 7 - - - - K - - -
